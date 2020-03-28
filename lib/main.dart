@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
           ],
           title: '5las',
           onGenerateRoute: Router.generateRoute,
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
             brightness: Brightness.light,
             primaryColor: AppColors.primaryColor,

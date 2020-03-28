@@ -21,6 +21,8 @@ class DefaultButton extends StatelessWidget {
       height: 42.0,
       buttonColor: backgroundColor,
       child: RaisedButton(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
         color: backgroundColor,
         elevation: 0,
         textColor: textColor,
