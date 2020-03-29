@@ -1,5 +1,6 @@
 import 'package:app_5las/src/commons/widgets/default_button.dart';
 import 'package:app_5las/src/config/colors.dart';
+import 'package:app_5las/src/config/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -56,7 +57,9 @@ class _SplashPageState extends State<SplashPage> {
                 backgroundColor: Colors.white,
                 textColor: AppColors.primaryColor,
                 text: 'EMPECEMOS',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(Router.signUpRoute);
+                },
               ),
               SizedBox(
                 height: _mediaQuery.size.height * 0.05,

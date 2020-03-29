@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   provider: ^3.2.0
   flutter_svg: ^0.14.2
+  flutter_statusbarcolor: ^0.2.3
 
 dev_dependencies:
   flutter_test:
@@ -44,3 +45,14 @@ flutter:
 
   assets:
     - assets/images/
+  
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Medium.ttf
+          weight: 400
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 700
+
+
+  

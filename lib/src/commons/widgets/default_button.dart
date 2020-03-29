@@ -9,8 +9,8 @@ class DefaultButton extends StatelessWidget {
   Color textColor;
 
   DefaultButton(
-      {this.text = '',
-      this.onPressed,
+      {@required this.text,
+      @required this.onPressed,
       this.backgroundColor = AppColors.primaryColor,
       this.textColor = Colors.white});
   @override

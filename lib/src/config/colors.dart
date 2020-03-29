@@ -12,6 +12,9 @@ class AppColors {
   static const int primary = 0xFFe20030;
   static const int opaqueSurface = 0xFFf4f9fc;
 
+  static const Color textColor = Color(0xFF000000);
+  static const Color backgroundColor = Color(0xFFFFFFFF);
+  
   static const MaterialColor primaryColor = MaterialColor(primary, <int, Color>{
     40: Color(0xFFea466a),
     60: Color(0xFFe73158),

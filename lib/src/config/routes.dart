@@ -1,4 +1,5 @@
 import 'package:app_5las/src/modules/auth/pages/login_page.dart';
+import 'package:app_5las/src/modules/signup/pages/signup_page.dart';
 import 'package:app_5las/src/modules/splash/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
@@ -11,13 +12,16 @@ class Router {
 
     switch (settings.name) {
       case loginRoute:
-        createMaterialRoute(LoginPage(), settings); break;
+        return createMaterialRoute(LoginPage(), settings); break;
       case splashRoute:
-        createMaterialRoute(SplashPage(), settings); break;
+        return createMaterialRoute(SplashPage(), settings); break;
+      case signUpRoute:
+        return createMaterialRoute(SignUpPage(), settings); break;
     }
   }
 
   //Page strings
   static const String loginRoute = 'login';
   static const String splashRoute = 'splash';
+  static const String signUpRoute = 'signup';
 }
