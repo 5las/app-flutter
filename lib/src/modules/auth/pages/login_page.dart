@@ -1,10 +1,13 @@
-
 import 'package:app_5las/src/commons/widgets/default_button.dart';
+import 'package:app_5las/src/commons/widgets/default_input_decoration.dart';
+import 'package:app_5las/src/commons/widgets/password_decoration.dart';
+import 'package:app_5las/src/commons/widgets/shadowed_container.dart';
 import 'package:app_5las/src/config/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:flutter_svg/svg.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,327 +15,167 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   bool _obscureText = true;
-
-  String _password;
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-     statusBarColor: AppColors.white,
-      statusBarBrightness: Brightness.light
-    ));
+        statusBarColor: AppColors.white, statusBarBrightness: Brightness.dark));
+    var _mediaQuery = MediaQuery.of(context);
+
     return Scaffold(
       backgroundColor: AppColors.white,
-      body: SingleChildScrollView(
+      body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal:20.0),
+          padding: EdgeInsets.all(_mediaQuery.size.width * 0.05),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
-                padding: const EdgeInsets.only(top: 60.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                      'Bienvenido a',
-                    style: TextStyle(
-                        color: AppColors.black,
-                      fontSize: 25,
-                      fontWeight: FontWeight.normal
-                    ),
-                  ),
-                  Text(
-                      '5Las',
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 38,
-                        fontWeight:FontWeight.bold
-                      ),
-                  ),
-                ],
+              Text(
+                'Bienvenido a',
+                style: TextStyle(
+                    color: AppColors.black,
+                    fontSize: 25,
+                    fontWeight: FontWeight.normal),
               ),
+              Text(
+                '5Las',
+                style: TextStyle(
+                    color: AppColors.black,
+                    fontSize: 38,
+                    fontWeight: FontWeight.bold),
               ),
               SizedBox(
-              height: 16.0,
-            ),
-              Padding(
-                padding: const EdgeInsets.only(top:20.0),
-                child:Theme(
-                  data: Theme.of(context).copyWith(splashColor: Colors.transparent),
-                  child: Container(
-                    height: 60.0,
-                    child: TextFormField(
-                      autofocus: false,
-                      style: TextStyle(fontSize: 22.0, color: AppColors.black),
-                      decoration: InputDecoration(
-                        suffixIcon: Container(
-                          child: Image.asset(
-                              'assets/images/user.png',
-                            //color: AppColors.primaryColor,
-                            color: AppColors.inputHintColor,
-                            scale: 2.8,
-                          ),
-                        ),
-                        filled: true,
-                        fillColor: Color(0xFFf4f9fc),
-                        hintText: 'Correo',
-                        contentPadding:
-                        const EdgeInsets.only(left: 12.0, bottom: 8.0, top: 12.0),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red),
-                          borderRadius: BorderRadius.circular(25.7),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(25.7),
-                        ),
-                      ),
-                    ),
-                  ),
+                height: _mediaQuery.size.height * 0.04,
+              ),
+              Container(
+                height: 60.0,
+                child: TextFormField(
+                  autofocus: false,
+                  style: TextStyle(fontSize: 22.0, color: AppColors.black),
+                  decoration: DefaultInputDecoration(
+                      hintText: 'Correo', suffixIcon: Icon(Icons.person)),
                 ),
               ),
-              Theme(
-                data: Theme.of(context).copyWith(splashColor: Colors.transparent),
-                child: Container(
-                  height: 60.0,
-                  child: TextFormField(
-                    autofocus: false,
-                    style: TextStyle(fontSize: 22.0, color: AppColors.black),
-                    obscureText: _obscureText,
-                    validator: (val) => val.length < 6 ? 'Verifique su contraseña.' : null,
-                    decoration: InputDecoration(
-                      hoverColor: AppColors.black,
-                      suffixIcon: Container(
-                        child: (_obscureText)
-                            ?GestureDetector(
-                          onTap: _toggle,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right:10.0),
-                                child: Image.asset(
-                                'assets/images/eye_hide.png',
-                                color: AppColors.inputHintColor,
-                                scale: 2.8,),
-                              ),
-                            )
-                            :GestureDetector(
-                          onTap: _toggle,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right:2.0),
-                                child: Image.asset(
-                          'assets/images/eye_show.png',
-                          color: AppColors.inputHintColor,
-                          scale: 2.8,
-                        ),
-                              ),
-                            ),
-                      ),
-                      filled: true,
-                      fillColor: Color(0xFFf4f9fc),
-                      hintText: 'Contraseña',
-                      contentPadding:
-                      const EdgeInsets.only(left: 12.0, bottom: 8.0, top: 12.0),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red),
-                        borderRadius: BorderRadius.circular(25.7),
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(25.7),
-                      ),
-                    ),
-                  ),
+              Container(
+                height: 60.0,
+                child: TextFormField(
+                  autofocus: false,
+                  style: TextStyle(fontSize: 22.0, color: AppColors.black),
+                  obscureText: _obscureText,
+                  validator: (val) =>
+                      val.length < 6 ? 'Verifique su contraseña.' : null,
+                  decoration: PasswordDecoration(
+                      obscureText: _obscureText, onTap: _toggle),
                 ),
               ),
               GestureDetector(
-                onTap: (){},
+                onTap: () {},
                 child: Align(
-                  alignment: Alignment.topRight,
+                  alignment: Alignment.centerRight,
                   child: Container(
                     child: Text(
-                        '¿Olvidaste tu contraseña?',
+                      '¿Olvidaste tu contraseña?',
+                      textAlign: TextAlign.end,
                       style: TextStyle(
-                        fontSize: 13.0,
-                        fontWeight: FontWeight.w500
-                      ),
+                          fontSize: 13.0, fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
               ),
               SizedBox(
-                height: 24.0,
+                height: _mediaQuery.size.height * 0.05,
               ),
-              DefaultButton(
-                backgroundColor: AppColors.primaryColor,
-                textColor: AppColors.white,
-                text: 'INGRESAR',
-                onPressed: (){},
-              ),
+              Align(
+                  alignment: Alignment.center,
+                  child: DefaultButton(
+                    backgroundColor: AppColors.primaryColor,
+                    textColor: AppColors.white,
+                    text: 'INGRESAR',
+                    onPressed: () {},
+                  )),
               SizedBox(
-                height: 40.0,
+                height: _mediaQuery.size.height * 0.03,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                  child:Container(
-                      child: null,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      height: 1,
+                      width: 40,
+                      color: Colors.black,
                     ),
-                  ),
-                Expanded(
-                  flex: 2,
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        width: 8.0,
-                        child: null,
-                      ),
-                      Container(
-                        height:1.0,
-                        width:46.0,
-                        color:AppColors.black,
-                      ),
-                    ],
-                  ),
-                ),
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        ' o contnúa con ',
-                        style: TextStyle(
-                          fontSize: 14.0
-                        ),
-                      ),
+                    SizedBox(
+                      width: 10.0,
                     ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          width: 8.0,
-                          child: null,
-                          ),
-                        Container(
-                          height:1.0,
-                          width:46.0,
-                          color:AppColors.black,
-                        ),
-                      ],
+                    Text('o continuar con'),
+                    SizedBox(
+                      width: 10.0,
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child:Container(
-                      child: null,
+                    Container(
+                      height: 1,
+                      width: 40,
+                      color: Colors.black,
                     ),
-                  ),
-                ],
-              ),
+                  ]),
               SizedBox(
-                height: 40.0,
+                height: _mediaQuery.size.height * 0.04,
               ),
               SizedBox(
                 height: 60.0,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    InkWell(
-                      onTap: (){},
-                      child: Container(
-                        height: 50.0,
-                        width: 50.0,
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(8.0),
-                              topRight: Radius.circular(8.0),
-                              bottomLeft: Radius.circular(8.0),
-                              bottomRight: Radius.circular(8.0)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: AppColors.backgroundColorDark,
-                                blurRadius: 6,
-                                spreadRadius: 2.0,
-                                offset: Offset(0, 6))
-                          ],
-                        ),
-                        child:  Image.asset(
-                          'assets/images/logo-facebook.png',
-                          scale: 2.8,
-                        ),
-                      ),
-                    ),
+                    GestureDetector(
+                        onTap: () {},
+                        child: ShadowedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: SvgPicture.asset(
+                            'assets/images/facebook_logo.svg',
+                          ),
+                        )),
                     SizedBox(
                       width: 20.0,
                     ),
-                    InkWell(
-                      onTap: (){},
-                      child: Container(
-                        height: 50.0,
-                        width: 50.0,
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(8.0),
-                              topRight: Radius.circular(8.0),
-                              bottomLeft: Radius.circular(8.0),
-                              bottomRight: Radius.circular(8.0)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: AppColors.backgroundColorDark,
-                                blurRadius: 6,
-                                spreadRadius: 2.0,
-                                offset: Offset(0, 6,))
-                          ],
-                        ),
-                        child:  Image.asset(
-                          'assets/images/logo-google.png',
-                          scale: 2.8,
-                        ),
-                      ),
-                    ),
+                    GestureDetector(
+                        onTap: () {},
+                        child: ShadowedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: SvgPicture.asset(
+                            'assets/images/google_logo.svg',
+                          ),
+                        )),
                   ],
                 ),
               ),
               SizedBox(
-                height: 40.0,
+                height: _mediaQuery.size.height * 0.04,
               ),
-              Column(
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.center,
-                    child: Container(
-                      child: Text(
-                        '¿Aún no tienes una cuenta?',
-                        style: TextStyle(
-                            fontSize: 13.0,
-                            fontWeight: FontWeight.normal
-                        ),
-                      ),
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  child: Text(
+                    '¿Aún no tienes una cuenta?',
+                    style: TextStyle(
+                        fontSize: 13.0, fontWeight: FontWeight.normal),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    child: Text(
+                      'Regístrate',
+                      style: TextStyle(
+                          fontSize: 13.0, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: (){},
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        child: Text(
-                          'Regístrate',
-                          style: TextStyle(
-                              fontSize: 13.0,
-                              fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ],
           ),
@@ -341,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _toggle(){
+  void _toggle() {
     setState(() {
       _obscureText = !_obscureText;
     });
