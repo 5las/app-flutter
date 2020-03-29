@@ -11,18 +11,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-            providers: [],
-            child: MaterialApp(
-              title: '5las',
-              onGenerateRoute: Router.generateRoute,
-              theme: ThemeData(
-                fontFamily: 'Montserrat',
-                  brightness: Brightness.light,
-                  primaryColor: AppColors.primaryColor,
-                  accentColor: AppColors.primaryColor[200],
-                  backgroundColor: Colors.white,
-                  buttonColor: AppColors.primaryColor),
-              home: SplashPage(),
-            ));
+        providers: [],
+        child: MaterialApp(
+          supportedLocales: [
+            const Locale('es')
+          ],
+          title: '5las',
+          onGenerateRoute: Router.generateRoute,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            brightness: Brightness.light,
+            fontFamily: 'Montserrat',
+            primaryColor: AppColors.primaryColor,
+            accentColor: AppColors.primaryColor[200],
+            backgroundColor: Colors.white,
+            buttonColor: AppColors.primaryColor
+          ),
+          home: SplashPage(),
+        ));
   }
 }

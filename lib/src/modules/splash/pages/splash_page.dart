@@ -4,6 +4,7 @@ import 'package:app_5las/src/config/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SplashPage extends StatefulWidget {
@@ -15,12 +16,10 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     var _mediaQuery = MediaQuery.of(context);
-    
+    FlutterStatusbarcolor.setStatusBarColor(AppColors.primaryColor);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-        statusBarColor: Colors.white,
-        statusBarBrightness:
-            Brightness.dark
-        ));
+      statusBarIconBrightness: Brightness.light,
+    ));
 
     return Scaffold(
       body: Container(
