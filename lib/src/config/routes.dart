@@ -8,7 +8,6 @@ class Router {
     MaterialPageRoute createMaterialRoute(Widget page, RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => page, settings: settings);
     }
-
     switch (settings.name) {
       case loginRoute:
         createMaterialRoute(LoginPage(), settings); break;

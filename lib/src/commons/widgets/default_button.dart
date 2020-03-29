@@ -17,10 +17,12 @@ class DefaultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var _mediaQuery = MediaQuery.of(context);
     return ButtonTheme(
-      minWidth: _mediaQuery.size.width * 0.85,
-      height: 42.0,
+      minWidth: _mediaQuery.size.width * 0.9,
+      height: 48.0,
       buttonColor: backgroundColor,
       child: RaisedButton(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
         color: backgroundColor,
         elevation: 0,
         textColor: textColor,
