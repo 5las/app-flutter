@@ -1,4 +1,5 @@
 import 'package:app_5las/src/modules/auth/pages/login_page.dart';
+import 'package:app_5las/src/modules/onBoarding/pages/onboarding_page.dart';
 import 'package:app_5las/src/modules/splash/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,8 @@ class Router {
       return MaterialPageRoute(builder: (_) => page, settings: settings);
     }
     switch (settings.name) {
+      case onBoardingRoute:
+        createMaterialRoute(OnBoardingPage(), settings); break;
       case loginRoute:
         createMaterialRoute(LoginPage(), settings); break;
       case splashRoute:
@@ -16,7 +19,8 @@ class Router {
     }
   }
 
-  //Page strings
+  /// Page strings
+  static const String onBoardingRoute = 'onBoarding';
   static const String loginRoute = 'login';
   static const String splashRoute = 'splash';
 }

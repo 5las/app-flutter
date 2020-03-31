@@ -1,6 +1,7 @@
 
 import 'package:app_5las/src/commons/widgets/default_button.dart';
 import 'package:app_5las/src/config/colors.dart';
+import 'package:app_5las/src/modules/onBoarding/pages/onboarding_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -31,6 +32,9 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              SizedBox(
+                height: 56.0,
+              ),
               Container(
                 padding: const EdgeInsets.only(top: 60.0),
                 child: Column(
@@ -168,7 +172,9 @@ class _LoginPageState extends State<LoginPage> {
                 backgroundColor: AppColors.primaryColor,
                 textColor: AppColors.white,
                 text: 'INGRESAR',
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => OnBoardingPage()));
+                },
               ),
               SizedBox(
                 height: 40.0,
@@ -318,7 +324,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){},
+                    onTap: (){
+                    },
                     child: Align(
                       alignment: Alignment.center,
                       child: Container(
