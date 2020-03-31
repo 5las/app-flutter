@@ -8,6 +8,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 class OnBoardingPage extends StatefulWidget {
@@ -58,118 +59,286 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       ),
       body:Padding(
         padding: const EdgeInsets.symmetric(horizontal:20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(
-              height: 22.0,
-            ),
-            Text(
-                '¿Dónde quieres comprar?',
-              style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(
+                height: 22.0,
               ),
-            ),
-            SizedBox(
-              height: 32.0,
-            ),
-            Text(
-              "Departamento/Provincia* ",
-              style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600
-              ),
-            ),
-        Container(
-          decoration: BoxDecoration(
-            color: AppColors.backgroundColorComboBox,
-            borderRadius: BorderRadius.only(
-              topLeft: const Radius.circular(20.0),
-              topRight: const Radius.circular(20.0),
-              bottomLeft: const Radius.circular(20.0),
-              bottomRight: const Radius.circular(20.0),
-            ),
-          ),
-          child:  Padding(
-            padding: const EdgeInsets.symmetric(horizontal:19.0),
-            child: DropDownDepartments(),
-          ),
-        ),
-            SizedBox(
-              height: 16.0,
-            ),
-            Text(
-              "Distrito* ",
-              style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: AppColors.backgroundColorComboBox,
-                borderRadius: BorderRadius.only(
-                  topLeft: const Radius.circular(20.0),
-                  topRight: const Radius.circular(20.0),
-                  bottomLeft: const Radius.circular(20.0),
-                  bottomRight: const Radius.circular(20.0),
+              Text(
+                  '¿Dónde quieres comprar?',
+                style: TextStyle(
+                    color: AppColors.black,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold
                 ),
               ),
-              child:  Padding(
-                padding: const EdgeInsets.symmetric(horizontal:19.0),
-                child: DropDownDistricts(),
+              SizedBox(
+                height: 32.0,
               ),
-            ),
-            SizedBox(
-              height: 16.0,
-            ),
-            Text(
-              "Elija un establecimiento* ",
-              style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: AppColors.backgroundColorComboBox,
-                borderRadius: BorderRadius.only(
-                  topLeft: const Radius.circular(20.0),
-                  topRight: const Radius.circular(20.0),
-                  bottomLeft: const Radius.circular(20.0),
-                  bottomRight: const Radius.circular(20.0),
+              Text(
+                "Departamento/Provincia* ",
+                style: TextStyle(
+                    color: AppColors.black,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w600
                 ),
               ),
-              child:  Padding(
-                padding: const EdgeInsets.symmetric(horizontal:19.0),
-                child: DropDownEstablishment(),
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.backgroundColorComboBox,
+              borderRadius: BorderRadius.only(
+                topLeft: const Radius.circular(20.0),
+                topRight: const Radius.circular(20.0),
+                bottomLeft: const Radius.circular(20.0),
+                bottomRight: const Radius.circular(20.0),
               ),
             ),
-            SizedBox(
-              height: 18.0,
+            child:  Padding(
+              padding: const EdgeInsets.symmetric(horizontal:19.0),
+              child: DropDownDepartments(),
             ),
-        Container(
-          child:  cardsSlider()
-        ),
-            SizedBox(
-              height: 18.0,
-            ),
-            DefaultButton(
-              backgroundColor: AppColors.primaryColor,
-              textColor: AppColors.white,
-              text: 'ELEGIR HORARIO',
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => OnBoardingPage()));
-              },
-            ),
-          ],
+          ),
+              SizedBox(
+                height: 16.0,
+              ),
+              Text(
+                "Distrito* ",
+                style: TextStyle(
+                    color: AppColors.black,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w600
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: AppColors.backgroundColorComboBox,
+                  borderRadius: BorderRadius.only(
+                    topLeft: const Radius.circular(20.0),
+                    topRight: const Radius.circular(20.0),
+                    bottomLeft: const Radius.circular(20.0),
+                    bottomRight: const Radius.circular(20.0),
+                  ),
+                ),
+                child:  Padding(
+                  padding: const EdgeInsets.symmetric(horizontal:19.0),
+                  child: DropDownDistricts(),
+                ),
+              ),
+              SizedBox(
+                height: 16.0,
+              ),
+              Text(
+                "Elija un establecimiento* ",
+                style: TextStyle(
+                    color: AppColors.black,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w600
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: AppColors.backgroundColorComboBox,
+                  borderRadius: BorderRadius.only(
+                    topLeft: const Radius.circular(20.0),
+                    topRight: const Radius.circular(20.0),
+                    bottomLeft: const Radius.circular(20.0),
+                    bottomRight: const Radius.circular(20.0),
+                  ),
+                ),
+                child:  Padding(
+                  padding: const EdgeInsets.symmetric(horizontal:19.0),
+                  child: DropDownEstablishment(),
+                ),
+              ),
+              SizedBox(
+                height: 18.0,
+              ),
+          Container(
+            child:  cardsSlider()
+          ),
+              SizedBox(
+                height: 18.0,
+              ),
+              DefaultButton(
+                backgroundColor: AppColors.primaryColor,
+                textColor: AppColors.white,
+                text: 'ELEGIR HORARIO',
+                onPressed: (){
+                  buildDialogSelectSchedule(context);
+                },
+              ),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  Future<void> buildDialogSelectSchedule(BuildContext context){
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          int selectedRadio = 0;
+          var listSchedule =
+          [
+            '10:00 - 11:00',
+            '11:00 - 12:00',
+            '12:00 - 13:00',
+            '13:00 - 14:00',
+            '14:00 - 15:00',
+            '15:00 - 16:00'
+          ];
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            content: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+                var _mediaQuery = MediaQuery.of(context);
+                return Container(
+                  height: _mediaQuery.size.height * 0.56,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                            'Horarios disponibles:',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w500
+                          ),
+                        ),
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: List<Widget>.generate(6,  (int index) {
+                              return ListTile(
+                                leading: Radio<int>(
+                                  focusColor: AppColors.primaryColor,
+                                  activeColor: AppColors.primaryColor,
+                                  value: index,
+                                  groupValue: selectedRadio,
+                                  onChanged: (int value) {
+                                    setState(() => selectedRadio = value);
+                                  },
+                                ),
+                                title: Text(
+                                  '${listSchedule[index]}',
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500
+                                  ),
+                                ),
+                              );
+                            }),
+                          ),
+                        ),
+                        DefaultButton(
+                          text: 'GENERAR TICKET',
+                          onPressed: (){
+                            dialogSelectedSchedule(context);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
+        }
+        );
+  }
+
+  Future<void> dialogSelectedSchedule(BuildContext context){
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          int selectedRadio = 0;
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            content: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+                var _mediaQuery = MediaQuery.of(context);
+                return Container(
+                  height: _mediaQuery.size.height * 0.30,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 16.0,
+                        ),
+                        Text(
+                          'Su turno es:',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w500
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                              '15:00 - 16:00',
+                            style: TextStyle(
+                                fontSize: 25.0,
+                                fontWeight: FontWeight.bold
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        Text(
+                          '¿Desea confirmar ese horario?',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w500
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12.0,
+                        ),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                         children: <Widget>[
+                           Container(
+                             width: _mediaQuery.size.width * 0.3,
+                             child: DefaultButton(
+                               text: 'SI',
+                               textColor: AppColors.white,
+                               onPressed: (){},
+                             ),
+                           ),
+                           Container(
+                             width: _mediaQuery.size.width * 0.3,
+                             child: DefaultButton(
+                               text: 'NO',
+                               textColor: AppColors.primaryColor,
+                               backgroundColor: AppColors.white,
+                               borderColor: AppColors.primaryColor,
+                               onPressed: (){},
+                             ),
+                           ),
+                         ],
+                       )
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
+        }
     );
   }
 
@@ -225,21 +394,13 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                               padding:
                               const EdgeInsets.all(6.0),
                               child: Column(
-                                mainAxisAlignment:
-                                MainAxisAlignment
-                                    .center,
-                                crossAxisAlignment:
-                                CrossAxisAlignment
-                                    .start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Container(
                                     constraints:
                                     new BoxConstraints(
-                                      maxWidth: MediaQuery.of(
-                                          context)
-                                          .size
-                                          .width *
-                                          0.5,
+                                      maxWidth: MediaQuery.of(context).size.width * 0.5,
                                     ),
                                     child: Padding(
                                       padding:

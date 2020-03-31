@@ -7,10 +7,12 @@ class DefaultButton extends StatelessWidget {
   Function onPressed;
   Color backgroundColor;
   Color textColor;
+  Color borderColor;
 
   DefaultButton(
       {this.text = '',
       this.onPressed,
+        this.borderColor = AppColors.primaryColor,
       this.backgroundColor = AppColors.primaryColor,
       this.textColor = Colors.white});
   @override
@@ -31,8 +33,10 @@ class DefaultButton extends StatelessWidget {
           text,
           style: TextStyle(letterSpacing: 1.5),
         ),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(14.0),
+            side: BorderSide(color: borderColor)
+        ),
       ),
     );
   }
