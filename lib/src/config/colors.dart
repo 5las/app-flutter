@@ -15,6 +15,8 @@ class AppColors {
   static const black = Color(0xFF000000);
   static const white = Color(0xFFFFFFFF);
   static const inputHintColor = Color(0xFFa4b3c1);
+  static const backgroundColor = Color(0xFFFFFFFF);
+  static const textColor = Color(0xFF000000);
   static const backgroundColorDark = Color(0xFFe9edf7);
 
   static const MaterialColor primaryColor = MaterialColor(primary, <int, Color>{

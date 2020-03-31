@@ -3,6 +3,7 @@ import 'package:app_5las/src/commons/widgets/default_input_decoration.dart';
 import 'package:app_5las/src/commons/widgets/password_decoration.dart';
 import 'package:app_5las/src/commons/widgets/shadowed_container.dart';
 import 'package:app_5las/src/config/colors.dart';
+import 'package:app_5las/src/config/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -53,16 +54,16 @@ class _LoginPageState extends State<LoginPage> {
                 height: 60.0,
                 child: TextFormField(
                   autofocus: false,
-                  style: TextStyle(fontSize: 22.0, color: AppColors.black),
+                  style: TextStyle(fontSize: 16.0, color: AppColors.black),
                   decoration: DefaultInputDecoration(
-                      hintText: 'Correo', suffixIcon: Icon(Icons.person)),
+                      hintText: 'Correo', suffixIconData: Icons.person),
                 ),
               ),
               Container(
                 height: 60.0,
                 child: TextFormField(
                   autofocus: false,
-                  style: TextStyle(fontSize: 22.0, color: AppColors.black),
+                  style: TextStyle(fontSize: 16.0, color: AppColors.black),
                   obscureText: _obscureText,
                   validator: (val) =>
                       val.length < 6 ? 'Verifique su contraseña.' : null,
@@ -165,7 +166,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushNamed(Router.signUpRoute);
+                },
                 child: Align(
                   alignment: Alignment.center,
                   child: Container(

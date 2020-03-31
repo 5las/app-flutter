@@ -57,7 +57,7 @@ class _SplashPageState extends State<SplashPage> {
                 textColor: AppColors.primaryColor,
                 text: 'EMPECEMOS',
                 onPressed: () {
-                  Navigator.of(context).pushNamed(Router.signUpRoute);
+                  Navigator.of(context).pushNamed(Router.loginRoute);
                 },
               ),
               SizedBox(
