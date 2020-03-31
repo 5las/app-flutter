@@ -1,4 +1,5 @@
 import 'package:app_5las/src/commons/widgets/default_button.dart';
+import 'package:app_5las/src/commons/widgets/nav_drawer.dart';
 import 'package:app_5las/src/config/colors.dart';
 import 'package:app_5las/src/config/colors.dart';
 import 'package:app_5las/src/modules/onBoarding/widgets/departments_aux.dart';
@@ -52,11 +53,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           ],
         ),
         elevation: 0.0,
-        leading: Icon(
-            Icons.menu,
-          color: AppColors.white,
-        ),
       ),
+      drawer: NavDrawer(),
       body:Padding(
         padding: const EdgeInsets.symmetric(horizontal:20.0),
         child: SingleChildScrollView(
@@ -239,6 +237,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                         DefaultButton(
                           text: 'GENERAR TICKET',
                           onPressed: (){
+                            Navigator.of(context, rootNavigator: true).pop('dialog');
                             dialogSelectedSchedule(context);
                           },
                         ),
@@ -326,7 +325,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                                textColor: AppColors.primaryColor,
                                backgroundColor: AppColors.white,
                                borderColor: AppColors.primaryColor,
-                               onPressed: (){},
+                               onPressed: (){
+                                 Navigator.of(context, rootNavigator: true).pop('dialog');
+                               },
                              ),
                            ),
                          ],

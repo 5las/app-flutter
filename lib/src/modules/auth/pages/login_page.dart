@@ -23,7 +23,6 @@ class _LoginPageState extends State<LoginPage> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
         statusBarColor: AppColors.white, statusBarBrightness: Brightness.dark));
     var _mediaQuery = MediaQuery.of(context);
-    //FlutterStatusbarcolor.setStatusBarColor(AppColors.white);
 
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
