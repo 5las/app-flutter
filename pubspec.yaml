@@ -29,7 +29,6 @@ dependencies:
 
   flutter_svg: ^0.14.2
   flutter_statusbarcolor: ^0.2.3
-
   logger: ^0.7.0+2
 
 dev_dependencies:
@@ -50,3 +49,14 @@ flutter:
 
   assets:
     - assets/images/
+  
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Medium.ttf
+          weight: 400
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 700
+
+
+  

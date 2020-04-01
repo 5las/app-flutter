@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             brightness: Brightness.light,
+            fontFamily: 'Montserrat',
             primaryColor: AppColors.primaryColor,
             accentColor: AppColors.primaryColor[200],
             backgroundColor: Colors.white,

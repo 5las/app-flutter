@@ -10,8 +10,8 @@ class DefaultButton extends StatelessWidget {
   Color borderColor;
 
   DefaultButton(
-      {this.text = '',
-      this.onPressed,
+      {@required this.text,
+      @required this.onPressed,
         this.borderColor = AppColors.primaryColor,
       this.backgroundColor = AppColors.primaryColor,
       this.textColor = Colors.white});
