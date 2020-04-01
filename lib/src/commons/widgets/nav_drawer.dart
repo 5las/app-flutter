@@ -1,4 +1,5 @@
 import 'package:app_5las/src/config/colors.dart';
+import 'package:app_5las/src/modules/profile/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class NavDrawer extends StatefulWidget {
@@ -47,7 +48,9 @@ class _NavDrawerState extends State<NavDrawer> {
                   fontSize: 16.0,
                   fontWeight: FontWeight.w500),
             ),
-            onTap: () => {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+            },
           ),
           Padding(
             padding: const EdgeInsets.only(
