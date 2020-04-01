@@ -9,6 +9,7 @@ class NavDrawer extends StatefulWidget {
 class _NavDrawerState extends State<NavDrawer> {
   @override
   Widget build(BuildContext context) {
+    var _mediaQuery = MediaQuery.of(context);
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -19,39 +20,38 @@ class _NavDrawerState extends State<NavDrawer> {
               children: <Widget>[
                 Icon(Icons.menu),
                 SizedBox(
-                  height: 60.0,
+                  height: _mediaQuery.size.height * 0.06,
                 ),
                 Text(
                   'Hola Luis',
                   style: TextStyle(
                       color: AppColors.black,
                       fontSize: 25.0,
-                      fontWeight: FontWeight.bold
-                  ),
+                      fontWeight: FontWeight.bold),
                 ),
               ],
             ),
             decoration: BoxDecoration(
-                color: AppColors.white,
+              color: AppColors.white,
             ),
           ),
           ListTile(
             leading: Icon(
-                Icons.person,
+              Icons.person,
               color: AppColors.primaryColor,
             ),
             title: Text(
               'Perfil',
               style: TextStyle(
-                color: AppColors.black,
-                fontSize: 16.0,
-                fontWeight: FontWeight.w500
-              ),
+                  color: AppColors.black,
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w500),
             ),
             onTap: () => {},
           ),
           Padding(
-            padding: const EdgeInsets.only(top:20.0,right: 40.0, left: 70.0, bottom: 20.0),
+            padding: const EdgeInsets.only(
+                right: 40.0, left: 70.0, bottom: 20.0),
             child: Container(
               height: 1,
               width: 40,
@@ -66,10 +66,9 @@ class _NavDrawerState extends State<NavDrawer> {
             title: Text(
               'Políticas de privacidad',
               style: TextStyle(
-                color: AppColors.inputHintColor,
+                  color: AppColors.inputHintColor,
                   fontSize: 16.0,
-                  fontWeight: FontWeight.w500
-              ),
+                  fontWeight: FontWeight.w500),
             ),
             onTap: () {},
           ),
@@ -83,8 +82,7 @@ class _NavDrawerState extends State<NavDrawer> {
               style: TextStyle(
                   color: AppColors.inputHintColor,
                   fontSize: 16.0,
-                  fontWeight: FontWeight.w500
-              ),
+                  fontWeight: FontWeight.w500),
             ),
             onTap: () {},
           ),
@@ -98,13 +96,13 @@ class _NavDrawerState extends State<NavDrawer> {
               style: TextStyle(
                   color: AppColors.inputHintColor,
                   fontSize: 16.0,
-                  fontWeight: FontWeight.w500
-              ),
+                  fontWeight: FontWeight.w500),
             ),
             onTap: () {},
           ),
           Padding(
-            padding: const EdgeInsets.only(top:20.0,right: 40.0, left: 70.0, bottom: 20.0),
+            padding: const EdgeInsets.only(
+                top: 20.0, right: 40.0, left: 70.0),
             child: Container(
               height: 1,
               width: 40,
@@ -113,7 +111,7 @@ class _NavDrawerState extends State<NavDrawer> {
           ),
           ListTile(
             leading: Icon(
-                Icons.exit_to_app,
+              Icons.exit_to_app,
               color: AppColors.primaryColor,
             ),
             title: Text(
@@ -121,8 +119,7 @@ class _NavDrawerState extends State<NavDrawer> {
               style: TextStyle(
                   color: AppColors.black,
                   fontSize: 16.0,
-                  fontWeight: FontWeight.w500
-              ),
+                  fontWeight: FontWeight.w500),
             ),
             onTap: () {},
           ),
