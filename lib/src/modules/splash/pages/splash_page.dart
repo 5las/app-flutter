@@ -57,7 +57,8 @@ class _SplashPageState extends State<SplashPage> {
                 textColor: AppColors.primaryColor,
                 text: 'EMPECEMOS',
                 onPressed: () {
-                  Navigator.of(context).pushNamed(Router.signUpRoute);
+                  FlutterStatusbarcolor.setStatusBarColor(AppColors.white);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
                 },
               ),
               SizedBox(
