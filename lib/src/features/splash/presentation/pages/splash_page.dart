@@ -1,7 +1,6 @@
 import 'package:app_5las/src/commons/widgets/default_button.dart';
 import 'package:app_5las/src/config/colors.dart';
-import 'package:app_5las/src/config/routes.dart';
-import 'package:app_5las/src/features/auth/pages/login_page.dart';
+import 'package:app_5las/src/features/auth/presentation/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';

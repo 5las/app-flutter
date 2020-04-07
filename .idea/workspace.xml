@@ -9,16 +9,16 @@
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/commons/widgets/nav_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/commons/widgets/nav_drawer.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/config/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/config/routes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/modules/auth/bloc/login_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/bloc/login_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/modules/auth/pages/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/pages/login_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/modules/onBoarding/pages/onboarding_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onBoarding/pages/onboarding_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/modules/onBoarding/widgets/departments_aux.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onBoarding/widgets/departments_aux.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/modules/onBoarding/widgets/districts_aux.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onBoarding/widgets/districts_aux.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/modules/onBoarding/widgets/establishment_aux.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onBoarding/widgets/establishment_aux.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/modules/profile/pages/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/profile/pages/profile_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/modules/signup/bloc/signup_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/signup/bloc/signup_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/modules/signup/pages/signup_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/signup/pages/signup_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/modules/splash/pages/splash_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/splash/pages/splash_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/bloc/login_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/bloc/login_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/pages/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/pages/login_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/pages/onboarding_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/pages/onboarding_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/widgets/departments_aux.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/widgets/departments_aux.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/widgets/districts_aux.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/widgets/districts_aux.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/widgets/establishment_aux.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/widgets/establishment_aux.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/profile/pages/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/profile/presentation/pages/profile_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/signup/bloc/signup_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/signup/presentation/bloc/signup_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/signup/pages/signup_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/signup/presentation/pages/signup_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/splash/pages/splash_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/splash/presentation/pages/splash_page.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +49,7 @@
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/src/features/splash/domain" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -61,6 +61,7 @@
       <recent name="$PROJECT_DIR$/lib/src/features/profile" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/src/features/splash/domain" />
       <recent name="$PROJECT_DIR$/assets/images" />
     </key>
   </component>
