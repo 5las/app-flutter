@@ -1,7 +1,7 @@
-import 'package:app_5las/src/modules/auth/pages/login_page.dart';
-import 'package:app_5las/src/modules/signup/pages/signup_page.dart';
-import 'package:app_5las/src/modules/onBoarding/pages/onboarding_page.dart';
-import 'package:app_5las/src/modules/splash/pages/splash_page.dart';
+import 'package:app_5las/src/features/auth/presentation/pages/login_page.dart';
+import 'package:app_5las/src/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:app_5las/src/features/signup/presentation/pages/signup_page.dart';
+import 'package:app_5las/src/features/splash/presentation/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
 class Router {
