@@ -15,9 +15,11 @@ class AppColors {
   static const black = Color(0xFF000000);
   static const white = Color(0xFFFFFFFF);
   static const inputHintColor = Color(0xFFa4b3c1);
+  static const backgroundColor = Color(0xFFFFFFFF);
   static const backgroundColorDark = Color(0xFFe9edf7);
   static const backgroundColorComboBox = Color(0xFFf4f9fc);
   static const segmentNotice = Color(0xFF42b01c);
+  static const textColor = Color(0xFF000000);
 
   static const MaterialColor primaryColor = MaterialColor(primary, <int, Color>{
     40: Color(0xFFea466a),
