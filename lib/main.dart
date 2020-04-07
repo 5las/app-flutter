@@ -1,9 +1,10 @@
 import 'package:app_5las/src/config/colors.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:app_5las/src/config/routes.dart';
-import 'package:app_5las/src/modules/splash/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'src/features/splash/pages/splash_page.dart';
 
 void main() => runApp(MyApp());
 

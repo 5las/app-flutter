@@ -3,7 +3,7 @@ import 'package:app_5las/src/commons/widgets/default_input_decoration.dart';
 import 'package:app_5las/src/commons/widgets/password_decoration.dart';
 import 'package:app_5las/src/commons/widgets/shadowed_container.dart';
 import 'package:app_5las/src/config/colors.dart';
-import 'package:app_5las/src/modules/onBoarding/pages/onboarding_page.dart';
+import 'package:app_5las/src/features/onBoarding/pages/onboarding_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';

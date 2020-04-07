@@ -14,14 +14,14 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: AppColors.backgroundColor,
+          backgroundColor: AppColors.inputHintColor,
           brightness: Brightness.light,
           elevation: 0,
           leading: BackButton(
-            color: AppColors.textColor,
+            color: AppColors.inputHintColor,
           ),
         ),
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColors.inputHintColor,
         body: SizedBox.expand(
             child: SingleChildScrollView(
                 child: SafeArea(

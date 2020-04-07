@@ -2,7 +2,7 @@ import 'package:app_5las/src/commons/widgets/default_button.dart';
 import 'package:app_5las/src/commons/widgets/default_input_decoration.dart';
 import 'package:app_5las/src/commons/widgets/password_decoration.dart';
 import 'package:app_5las/src/config/colors.dart';
-import 'package:app_5las/src/modules/onBoarding/widgets/districts_aux.dart';
+import 'package:app_5las/src/features/onBoarding/widgets/districts_aux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
