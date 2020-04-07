@@ -6,19 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="3f19a9b7-2c1e-4da0-b6ae-6b285b43dcfa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/commons/widgets/nav_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/commons/widgets/nav_drawer.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/config/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/config/routes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/bloc/login_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/bloc/login_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/pages/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/pages/login_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/pages/onboarding_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/pages/onboarding_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/widgets/departments_aux.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/widgets/departments_aux.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/widgets/districts_aux.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/widgets/districts_aux.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/widgets/establishment_aux.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/widgets/establishment_aux.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/profile/pages/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/profile/presentation/pages/profile_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/signup/bloc/signup_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/signup/presentation/bloc/signup_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/signup/pages/signup_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/signup/presentation/pages/signup_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/splash/pages/splash_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/splash/presentation/pages/splash_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/pages/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/pages/login_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/pages/onboarding_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/pages/onboarding_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/profile/presentation/pages/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/profile/presentation/pages/profile_page.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
