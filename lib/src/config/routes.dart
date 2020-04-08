@@ -13,22 +13,31 @@ class Router {
     MaterialPageRoute createMaterialRoute(Widget page, RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => page, settings: settings);
     }
+
     switch (settings.name) {
       case onBoardingRoute:
-        createMaterialRoute(OnBoardingPage(), settings); break;
+        createMaterialRoute(OnBoardingPage(), settings);
+        break;
       case loginRoute:
-        return createMaterialRoute(LoginPage(), settings); break;
+        return createMaterialRoute(LoginPage(), settings);
+        break;
       case splashRoute:
-        return createMaterialRoute(SplashPage(), settings); break;
+        return createMaterialRoute(SplashPage(), settings);
+        break;
       case signUpRoute:
-        return createMaterialRoute(SignUpPage(), settings); break;
+        return createMaterialRoute(SignUpPage(), settings);
+        break;
       case qrRoute:
-        return createMaterialRoute(QrPage(), settings); break;
+        return createMaterialRoute(QrPage(), settings);
+        break;
       case timerRoute:
-        return createMaterialRoute(TimerPage(), settings); break;
+        return createMaterialRoute(TimerPage(), settings);
+        break;
       case finalRoute:
-        return createMaterialRoute(FinalPage(), settings); break;
+        return createMaterialRoute(FinalPage(), settings);
+        break;
     }
+    return createMaterialRoute(LoginPage(), settings);
   }
 
   /// Page strings
