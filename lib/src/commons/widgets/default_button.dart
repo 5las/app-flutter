@@ -7,12 +7,15 @@ class DefaultButton extends StatelessWidget {
   Function onPressed;
   Color backgroundColor;
   Color textColor;
+  Color borderColor;
+  bool elevation;
 
   DefaultButton(
       {@required this.text,
       @required this.onPressed,
+        this.borderColor = AppColors.primaryColor,
       this.backgroundColor = AppColors.primaryColor,
-      this.textColor = Colors.white});
+      this.textColor = Colors.white, this.elevation = false});
   @override
   Widget build(BuildContext context) {
     var _mediaQuery = MediaQuery.of(context);
@@ -24,15 +27,17 @@ class DefaultButton extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         color: backgroundColor,
-        elevation: 0,
+        elevation: (elevation) ? 2.0 : 0,
         textColor: textColor,
         onPressed: onPressed,
         child: Text(
           text,
           style: TextStyle(letterSpacing: 1.5),
         ),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(14.0),
+            side: BorderSide(color: borderColor)
+        ),
       ),
     );
   }
