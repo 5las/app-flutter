@@ -1,4 +1,4 @@
-import 'package:app_5las/src/commons/widgets/default_button.dart';
+//import 'package:app_5las/src/commons/widgets/default_button.dart';
 import 'package:app_5las/src/config/colors.dart';
 import 'package:app_5las/src/config/sizes.dart';
 import 'package:flutter/material.dart';
@@ -57,21 +57,21 @@ class FinalPage extends StatelessWidget {
                 SizedBox(
                   height: _mediaQuery.size.height * 0.06,
                 ),
-                DefaultButton(
+               /* DefaultButton(
                   text: '¿Cómo lavarse las manos para evitar el COVID-19?',
                   onPressed: () {},
                   backgroundColor: AppColors.primaryColor[120],
                   elevation: true,
-                ),
+                ),*/
                 SizedBox(
                   height: 10.0,
                 ),
-                DefaultButton(
+                /*DefaultButton(
                   text: '¿Cómo lavarse las manos para evitar el COVID-19?',
                   onPressed: () {},
                   backgroundColor: AppColors.primaryColor[120],
                   elevation: true,
-                ),
+                ),*/
                 SizedBox(
                   height: _mediaQuery.size.height * 0.08,
                 ),

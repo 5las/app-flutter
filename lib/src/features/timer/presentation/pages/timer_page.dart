@@ -1,4 +1,4 @@
-import 'package:app_5las/src/commons/widgets/default_button.dart';
+//import 'package:app_5las/src/commons/widgets/default_button.dart';
 import 'package:app_5las/src/config/colors.dart';
 import 'package:app_5las/src/config/routes.dart';
 import 'package:app_5las/src/config/sizes.dart';
@@ -96,10 +96,10 @@ class TimerPage extends StatelessWidget {
                             ],
                           )
                         ]),
-                    DefaultButton(
+                    /*DefaultButton(
                         text: 'FINALIZAR VISITA',
                         onPressed: () =>
-                            Navigator.of(context).pushNamed(Router.finalRoute)),
+                            Navigator.of(context).pushNamed(Router.finalRoute)),*/
                   ],
                 ))),
       ),

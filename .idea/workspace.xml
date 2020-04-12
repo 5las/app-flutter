@@ -5,11 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f19a9b7-2c1e-4da0-b6ae-6b285b43dcfa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/config/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/config/routes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/commons/widgets/default_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/widgets/default_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/commons/widgets/default_input_decoration.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/widgets/default_input_decoration.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/commons/widgets/input_container.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/widgets/input_container.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/commons/widgets/nav_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/widgets/nav_drawer.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/commons/widgets/password_decoration.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/widgets/password_decoration.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/commons/widgets/shadowed_container.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/widgets/shadowed_container.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/pages/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/pages/login_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/pages/onboarding_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/pages/onboarding_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/profile/presentation/pages/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/profile/presentation/pages/profile_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/profile/presentation/pages/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/signin/presentation/pages/sigin_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/splash/presentation/pages/splash_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/splash/presentation/pages/splash_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/widget_test.dart" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +29,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="KPSDU18904007277" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="8_Foldable_API_29" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -40,20 +52,25 @@
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/src/features/splash/domain" />
-    <property name="settings.editor.selected.configurable" value="flutter.settings" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/src/features/signin/domain" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/lib/src/features/splash/pages" />
-      <recent name="$PROJECT_DIR$/lib/src/features/profile/pages" />
-      <recent name="$PROJECT_DIR$/lib/src/features/splash" />
-      <recent name="$PROJECT_DIR$/lib/src/features/profile" />
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/src/features/signin/domain" />
       <recent name="$PROJECT_DIR$/lib/src/features/splash/domain" />
       <recent name="$PROJECT_DIR$/assets/images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/src/features/signin/data/models/request" />
+      <recent name="$PROJECT_DIR$/lib/src/core/data/datasources" />
+      <recent name="$PROJECT_DIR$/lib/src/core/widgets" />
+      <recent name="$PROJECT_DIR$/lib/src/features/splash/pages" />
+      <recent name="$PROJECT_DIR$/lib/src/features/profile/pages" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -67,6 +84,42 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager" selected="Flutter.main.dart">
+    <configuration name="isConnected" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="isConnected" />
+      <option name="testFile" value="$PROJECT_DIR$/test/core/network/network_info_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="should perform a GET request on a URL with email signin &#10;      being the endpoint and with application/json  header" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="should perform a GET request on a URL with email signin &#10;      being the endpoint and with application/json  header" />
+      <option name="testFile" value="$PROJECT_DIR$/test/features/signin/data/datasources/signin_remote_data_source_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="should perform a POST request on a URL with email signin &#10;      being the endpoint and with application/json  header" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="should perform a POST request on a URL with email signin &#10;      being the endpoint and with application/json  header" />
+      <option name="testFile" value="$PROJECT_DIR$/test/features/signin/data/datasources/signin_remote_data_source_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="should return SignIn when the response code is 200 (success)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="should return SignIn when the response code is 200 (success)" />
+      <option name="testFile" value="$PROJECT_DIR$/test/features/signin/data/datasources/signin_remote_data_source_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="should throw CacheException when there is not a cached value" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="should throw CacheException when there is not a cached value" />
+      <option name="testFile" value="$PROJECT_DIR$/test/features/signin/data/datasources/sigin_local_data_source_test.dart" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flutter Test.should return SignIn when the response code is 200 (success)" />
+        <item itemvalue="Flutter Test.should perform a POST request on a URL with email signin &#10;      being the endpoint and with application/json  header" />
+        <item itemvalue="Flutter Test.should perform a GET request on a URL with email signin &#10;      being the endpoint and with application/json  header" />
+        <item itemvalue="Flutter Test.should throw CacheException when there is not a cached value" />
+        <item itemvalue="Flutter Test.isConnected" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
