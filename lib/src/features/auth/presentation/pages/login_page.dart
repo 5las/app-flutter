@@ -1,7 +1,7 @@
-import 'package:app_5las/src/commons/widgets/default_button.dart';
-import 'package:app_5las/src/commons/widgets/default_input_decoration.dart';
-import 'package:app_5las/src/commons/widgets/password_decoration.dart';
-import 'package:app_5las/src/commons/widgets/shadowed_container.dart';
+import 'package:app_5las/src/core/widgets/default_button.dart';
+import 'package:app_5las/src/core/widgets/default_input_decoration.dart';
+import 'package:app_5las/src/core/widgets/password_decoration.dart';
+import 'package:app_5las/src/core/widgets/shadowed_container.dart';
 import 'package:app_5las/src/config/colors.dart';
 import 'package:app_5las/src/config/routes.dart';
 import 'package:app_5las/src/features/onboarding/presentation/pages/onboarding_page.dart';
