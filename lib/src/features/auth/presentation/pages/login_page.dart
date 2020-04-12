@@ -3,11 +3,11 @@ import 'package:app_5las/src/core/widgets/default_input_decoration.dart';
 import 'package:app_5las/src/core/widgets/password_decoration.dart';
 import 'package:app_5las/src/core/widgets/shadowed_container.dart';
 import 'package:app_5las/src/config/colors.dart';
+import 'package:app_5las/src/config/routes.dart';
 import 'package:app_5las/src/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LoginPage extends StatefulWidget {
@@ -178,6 +178,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   GestureDetector(
                     onTap: () {
+                      Navigator.of(context).pushNamed(Router.signUpRoute);
                     },
                     child: Align(
                       alignment: Alignment.center,

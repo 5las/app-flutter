@@ -1,6 +1,6 @@
 import 'package:app_5las/src/core/widgets/default_button.dart';
 import 'package:app_5las/src/config/colors.dart';
-import 'package:app_5las/src/features/auth/presentation/pages/login_page.dart';
+import 'package:app_5las/src/config/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -58,7 +58,7 @@ class _SplashPageState extends State<SplashPage> {
                 text: 'EMPECEMOS',
                 onPressed: () {
                   FlutterStatusbarcolor.setStatusBarColor(AppColors.white);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                  Navigator.pushNamed(context, Router.loginRoute);
                 },
               ),
               SizedBox(

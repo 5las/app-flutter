@@ -2,6 +2,7 @@ import 'package:app_5las/src/core/widgets/default_button.dart';
 import 'package:app_5las/src/core/widgets/nav_drawer.dart';
 import 'package:app_5las/src/config/colors.dart';
 import 'package:app_5las/src/config/colors.dart';
+import 'package:app_5las/src/config/routes.dart';
 import 'package:app_5las/src/features/onboarding/presentation/widgets/departments_aux.dart';
 import 'package:app_5las/src/features/onboarding/presentation/widgets/districts_aux.dart';
 import 'package:app_5las/src/features/onboarding/presentation/widgets/establishment_aux.dart';
@@ -298,7 +299,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                               child: DefaultButton(
                                 text: 'SI',
                                 textColor: AppColors.white,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed(Router.qrRoute);
+                                },
                               ),
                             ),
                             Container(
