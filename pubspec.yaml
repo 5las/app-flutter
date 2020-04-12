@@ -29,12 +29,24 @@ dependencies:
 
   flutter_svg: ^0.14.2
   flutter_statusbarcolor: ^0.2.3
-  logger: ^0.7.0+2
+  logger: ^0.8.3
+  equatable: ^1.1.1
+  dartz: ^0.8.9
+  json_annotation: ^3.0.1
+  flutter_secure_storage: ^3.3.2
+
+  data_connection_checker: ^0.3.4
+  http: ^0.12.0+4
+  shared_preferences: ^0.5.6+3
+  get_it: ^4.0.1
+  dio: ^3.0.9
+  build_runner: ^1.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  mockito: ^4.1.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
