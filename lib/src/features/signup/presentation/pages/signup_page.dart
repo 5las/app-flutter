@@ -1,7 +1,7 @@
-import 'package:app_5las/src/commons/widgets/default_button.dart';
-import 'package:app_5las/src/commons/widgets/default_input_decoration.dart';
+
 import 'package:app_5las/src/config/colors.dart';
-import 'package:app_5las/src/config/sizes.dart';
+import 'package:app_5las/src/core/widgets/default_button.dart';
+import 'package:app_5las/src/core/widgets/default_input_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
