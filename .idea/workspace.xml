@@ -6,22 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="3f19a9b7-2c1e-4da0-b6ae-6b285b43dcfa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/commons/widgets/default_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/widgets/default_button.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/commons/widgets/default_input_decoration.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/widgets/default_input_decoration.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/commons/widgets/input_container.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/widgets/input_container.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/commons/widgets/nav_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/widgets/nav_drawer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/commons/widgets/password_decoration.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/widgets/password_decoration.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/commons/widgets/shadowed_container.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/widgets/shadowed_container.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/pages/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/pages/login_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/pages/onboarding_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/pages/onboarding_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/profile/presentation/pages/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/signin/presentation/pages/sigin_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/splash/presentation/pages/splash_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/splash/presentation/pages/splash_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/config/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/config/routes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/bloc/login_bloc.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/pages/login_page.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/signin/presentation/bloc/signin_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/signin/presentation/bloc/signin_bloc.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/widget_test.dart" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

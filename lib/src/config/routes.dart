@@ -1,4 +1,3 @@
-import 'package:app_5las/src/features/auth/presentation/pages/login_page.dart';
 import 'package:app_5las/src/features/final/presentation/pages/final_page.dart';
 import 'package:app_5las/src/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:app_5las/src/features/qr/presentation/pages/qr_page.dart';
@@ -18,9 +17,6 @@ class Router {
       case onBoardingRoute:
         createMaterialRoute(OnBoardingPage(), settings);
         break;
-      case loginRoute:
-        return createMaterialRoute(LoginPage(), settings);
-        break;
       case splashRoute:
         return createMaterialRoute(SplashPage(), settings);
         break;
@@ -37,7 +33,6 @@ class Router {
         return createMaterialRoute(FinalPage(), settings);
         break;
     }
-    return createMaterialRoute(LoginPage(), settings);
   }
 
   /// Page strings
