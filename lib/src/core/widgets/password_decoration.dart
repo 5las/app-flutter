@@ -25,7 +25,7 @@ class PasswordDecoration extends InputDecoration {
           contentPadding:
               const EdgeInsets.only(left: 12.0, bottom: 8.0, top: 12.0),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red),
+            borderSide: BorderSide(color: AppColors.primaryColor, width: 1.2),
             borderRadius: BorderRadius.circular(14.0),
           ),
           enabledBorder: UnderlineInputBorder(
