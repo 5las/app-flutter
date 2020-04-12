@@ -9,6 +9,7 @@ class DefaultInputDecoration extends InputDecoration {
   DefaultInputDecoration(
       {@required this.hintText, this.prefixIconData, this.suffixIconData})
       : super(
+        errorText: null,
           suffixIcon: (suffixIconData != null)
               ? Icon(
                   suffixIconData,

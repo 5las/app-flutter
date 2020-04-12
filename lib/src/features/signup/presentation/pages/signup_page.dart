@@ -18,14 +18,14 @@ class _SignUpPageState extends State<SignUpPage> {
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: AppColors.inputHintColor,
+          backgroundColor: AppColors.backgroundColor,
           brightness: Brightness.light,
           elevation: 0,
           leading: BackButton(
             color: AppColors.inputHintColor,
           ),
         ),
-        backgroundColor: AppColors.inputHintColor,
+        backgroundColor: AppColors.backgroundColor,
         body: SizedBox.expand(
             child: SingleChildScrollView(
                 child: SafeArea(
