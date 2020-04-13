@@ -1,5 +1,5 @@
 import 'package:app_5las/src/config/colors.dart';
-import 'package:app_5las/src/features/signin/presentation/pages/sigin_page.dart';
+import 'package:app_5las/src/features/auth/presentation/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class NavDrawer extends StatefulWidget {
@@ -49,7 +49,7 @@ class _NavDrawerState extends State<NavDrawer> {
                   fontWeight: FontWeight.w500),
             ),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
             },
           ),
           Padding(
