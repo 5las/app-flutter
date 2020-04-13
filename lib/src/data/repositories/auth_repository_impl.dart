@@ -19,10 +19,8 @@ class AuthRepositoryImpl implements AuthRepository {
     final jwtParser = JwtUtils();
 
     try {
-      //Cabe recarcar que es el model, aun falta parsear el JWT
       final loginResponseModel =
           await remoteDataSource.getLoginResponse(params);
-      //parseamos y generamos un entity LoginResponse (en otros casos devolveriamos el mismo model)
       final parsedData = jwtParser.parseJWT(loginResponseModel.accessToken);
       final loginResponse = LoginResponse(
           dni: parsedData['dni'],
