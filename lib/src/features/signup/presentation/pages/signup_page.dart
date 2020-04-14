@@ -1,5 +1,4 @@
 import 'package:app_5las/src/config/colors.dart';
-import 'package:app_5las/src/core/network/service_locator.dart';
 import 'package:app_5las/src/core/widgets/default_button.dart';
 import 'package:app_5las/src/core/widgets/default_input_decoration.dart';
 import 'package:app_5las/src/features/signup/presentation/bloc/signup_bloc.dart';
@@ -7,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../injection_container.dart';
 
 class SignUpPage extends StatefulWidget {
   @override

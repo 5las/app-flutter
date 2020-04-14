@@ -5,28 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f19a9b7-2c1e-4da0-b6ae-6b285b43dcfa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/bloc/login_bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/bloc/login_state.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/config/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/config/routes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/core/network/service_locator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/network/service_locator.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/core/widgets/default_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/widgets/default_button.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/core/widgets/default_input_decoration.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/widgets/default_input_decoration.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/core/widgets/password_decoration.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/widgets/password_decoration.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/data/datasources/remote_data_source.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/data/datasources/remote_data_source.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/data/models/auth/login_response_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/data/models/auth/response/login_response_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/data/models/auth/login_response_model.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/data/models/auth/response/login_response_model.g.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/data/repositories/auth_repository_impl.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/data/repositories/auth_repository_impl.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/domain/repositories/auth_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/domain/repositories/login_repository.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/domain/usecases/login_attempt.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/domain/usecases/login_attempt.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/bloc/auth_bloc.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/bloc/auth_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/bloc/login_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/bloc/auth_state.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/bloc/bloc.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/pages/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/pages/login_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/injection_container.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/injection_container.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/config/api_url.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/core/network/network_info.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/core/network/service_locator.dart" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +16,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="KPSDU18904007277" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="8_Foldable_API_29" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
