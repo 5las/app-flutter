@@ -6,11 +6,8 @@ class DefaultInputDecoration extends InputDecoration {
   IconData suffixIconData;
   IconData prefixIconData;
 
-  DefaultInputDecoration(
-      {@required this.hintText, this.prefixIconData, this.suffixIconData})
-      : super(
-        errorText: null,
-          suffixIcon: (suffixIconData != null)
+  DefaultInputDecoration({@required this.hintText, this.prefixIconData, this.suffixIconData})
+      : super(errorText: null, suffixIcon: (suffixIconData != null)
               ? Icon(
                   suffixIconData,
                   color: AppColors.inputHintColor,

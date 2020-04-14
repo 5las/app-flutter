@@ -5,7 +5,4 @@ GetIt serviceLocator = GetIt.instance;
 
 Future<void> setupLocator() async{
   final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
-
-
 }

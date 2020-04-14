@@ -1,9 +1,10 @@
 import 'package:app_5las/src/core/error/exceptions.dart';
 import 'package:app_5las/src/core/error/failures.dart';
 import 'package:app_5las/src/data/datasources/remote_data_source.dart';
+import 'package:app_5las/src/features/auth/domain/entities/login_request.dart';
 import 'package:app_5las/src/features/auth/domain/entities/login_response.dart';
 import 'package:app_5las/src/features/auth/domain/entities/user_district.dart';
-import 'package:app_5las/src/features/auth/domain/repositories/auth_repository.dart';
+import 'package:app_5las/src/features/auth/domain/repositories/login_repository.dart';
 import 'package:app_5las/src/features/auth/domain/usecases/login_attempt.dart';
 import 'package:app_5las/src/utils/jwt_utils.dart';
 import 'package:dartz/dartz.dart';
@@ -15,12 +16,12 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({@required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, LoginResponse>> tryLogin(LoginParams params) async {
+  Future<Either<Failure, LoginResponse>> tryLogin(LoginParams loginParams) async {
     final jwtParser = JwtUtils();
 
     try {
       final loginResponseModel =
-          await remoteDataSource.getLoginResponse(params);
+          await remoteDataSource.login(loginParams);
       final parsedData = jwtParser.parseJWT(loginResponseModel.accessToken);
       final loginResponse = LoginResponse(
           dni: parsedData['dni'],

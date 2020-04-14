@@ -1,18 +1,18 @@
-import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+part of 'login_bloc.dart';
 
-@immutable
 abstract class AuthEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
 
-class GetSignIn extends AuthEvent {
+class LoggedIn extends AuthEvent {
   final String email;
   final String password;
 
-  GetSignIn(this.email, this.password);
+  LoggedIn(this.email,this.password);
 
   @override
   List<Object> get props => [email, password];
 }
+
+class LoggedOut extends AuthEvent {}
