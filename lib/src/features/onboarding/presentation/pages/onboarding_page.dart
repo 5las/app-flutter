@@ -1,6 +1,5 @@
 import 'package:app_5las/src/core/widgets/default_button.dart';
-import 'package:app_5las/src/features/auth/presentation/widgets/nav_drawer.dart';
-import 'package:app_5las/src/config/colors.dart';
+import 'package:app_5las/src/features/onboarding/presentation/widgets/nav_drawer.dart';
 import 'package:app_5las/src/config/colors.dart';
 import 'package:app_5las/src/config/routes.dart';
 import 'package:app_5las/src/features/onboarding/presentation/widgets/departments_aux.dart';

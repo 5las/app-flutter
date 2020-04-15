@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="3f19a9b7-2c1e-4da0-b6ae-6b285b43dcfa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/config/api_url.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/core/network/network_info.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/core/network/service_locator.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/data/datasources/remote_data_source.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/data/datasources/remote_data_source.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/widgets/nav_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/widgets/nav_drawer.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/pages/onboarding_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/pages/onboarding_page.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,6 +44,13 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/src/features/onboarding/presentation/widgets" />
+      <recent name="$PROJECT_DIR$/lib/src/data/models/auth/response" />
+      <recent name="$PROJECT_DIR$/lib/src/features/profile/presentation/pages" />
+      <recent name="$PROJECT_DIR$/lib/src/features/auth/presentation/widgets" />
+      <recent name="$PROJECT_DIR$/lib/src/features/signin/data/models/request" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
@@ -51,13 +58,6 @@
       <recent name="$PROJECT_DIR$/lib/src/features/signin/domain" />
       <recent name="$PROJECT_DIR$/lib/src/features/splash/domain" />
       <recent name="$PROJECT_DIR$/assets/images" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/lib/src/data/models/auth/response" />
-      <recent name="$PROJECT_DIR$/lib/src/features/profile/presentation/pages" />
-      <recent name="$PROJECT_DIR$/lib/src/features/auth/presentation/widgets" />
-      <recent name="$PROJECT_DIR$/lib/src/features/signin/data/models/request" />
-      <recent name="$PROJECT_DIR$/lib/src/core/data/datasources" />
     </key>
   </component>
   <component name="RunDashboard">
