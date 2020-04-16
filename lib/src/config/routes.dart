@@ -15,9 +15,6 @@ class Router {
     }
 
     switch (settings.name) {
-      case onBoardingRoute:
-        return createMaterialRoute(OnBoardingPage(), settings);
-        break;
       case splashRoute:
         return createMaterialRoute(SplashPage(), settings);
         break;
@@ -26,6 +23,9 @@ class Router {
         break;
       case signUpRoute:
         return createMaterialRoute(SignUpPage(), settings);
+        break;
+      case onBoardingRoute:
+        return createMaterialRoute(OnBoardingPage(), settings);
         break;
       case qrRoute:
         return createMaterialRoute(QrPage(), settings);

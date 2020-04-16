@@ -6,10 +6,10 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-class GetDistricts extends UseCase<List<District>, DistrictsParams> {
+class GetDistrict extends UseCase<List<District>, DistrictsParams> {
   final OnBoardingRepository onBoardingRepository;
 
-  GetDistricts({@required this.onBoardingRepository});
+  GetDistrict({@required this.onBoardingRepository});
 
   @override
   Future<Either<Failure, List<District>>> call(

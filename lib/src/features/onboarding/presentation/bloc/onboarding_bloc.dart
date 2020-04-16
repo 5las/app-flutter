@@ -16,7 +16,7 @@ const String INVALID_INPUT_FAILURE_MESSAGE =
     'Invalid Input';
 
 class OnBoardingBloc extends Bloc<OnBoardingEvent,OnBoardingState>{
-  final GetDistricts getDistricts;
+  final GetDistrict getDistricts;
 
   OnBoardingBloc({@required this.getDistricts});
 
