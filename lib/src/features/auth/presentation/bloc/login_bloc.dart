@@ -38,7 +38,7 @@ class  AuthBloc extends Bloc<AuthEvent, AuthState>{
       }
     }
 
-   if(event is  LoggedIn){
+   if(event is  LogInEvent){
         yield LoginLoading();
 
         final failureOrLogin = await loginAttempt.call(LoginParams(email: event.email,password: event.password));
