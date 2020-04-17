@@ -9,10 +9,12 @@ class DefaultButton extends StatelessWidget {
   Color textColor;
   Color borderColor;
   bool elevation;
+  Widget widget;
 
   DefaultButton(
       {@required this.text,
       @required this.onPressed,
+        this.widget,
         this.borderColor = AppColors.primaryColor,
       this.backgroundColor = AppColors.primaryColor,
       this.textColor = Colors.white, this.elevation = false});
@@ -30,7 +32,8 @@ class DefaultButton extends StatelessWidget {
         elevation: (elevation) ? 2.0 : 0,
         textColor: textColor,
         onPressed: onPressed,
-        child: Text(
+        child: (widget!=null)?
+            widget: Text(
           text,
           style: TextStyle(letterSpacing: 1.5),
         ),

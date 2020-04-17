@@ -16,13 +16,13 @@ class Router {
 
     switch (settings.name) {
       case onBoardingRoute:
-        createMaterialRoute(OnBoardingPage(), settings);
-        break;
-      case loginRoute:
-        return createMaterialRoute(LoginPage(), settings);
+        return createMaterialRoute(OnBoardingPage(), settings);
         break;
       case splashRoute:
         return createMaterialRoute(SplashPage(), settings);
+        break;
+      case loginRoute:
+        return createMaterialRoute(LoginPage(), settings);
         break;
       case signUpRoute:
         return createMaterialRoute(SignUpPage(), settings);
@@ -37,7 +37,6 @@ class Router {
         return createMaterialRoute(FinalPage(), settings);
         break;
     }
-    return createMaterialRoute(LoginPage(), settings);
   }
 
   /// Page strings
