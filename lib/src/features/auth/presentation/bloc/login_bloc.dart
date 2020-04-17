@@ -1,4 +1,3 @@
-import 'package:app_5las/src/features/auth/domain/entities/login_request.dart';
 import 'package:equatable/equatable.dart';
 import 'package:app_5las/src/core/error/failures.dart';
 import 'package:app_5las/src/features/auth/domain/entities/login_response.dart';

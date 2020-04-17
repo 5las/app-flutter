@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'package:app_5las/src/core/error/exceptions.dart';
-import 'package:app_5las/src/data/models/auth/response/login_response_model.dart';
+import 'package:app_5las/src/data/models/auth/login_response_model.dart';
 import 'package:app_5las/src/data/models/signup/district_model.dart';
 import 'package:app_5las/src/data/models/signup/signup_response_model.dart';
-import 'package:app_5las/src/features/auth/domain/entities/login_request.dart';
 import 'package:app_5las/src/features/auth/domain/usecases/login_attempt.dart';
 import 'package:app_5las/src/features/signup/domain/usecases/signup.dart';
 import 'package:flutter/cupertino.dart';
