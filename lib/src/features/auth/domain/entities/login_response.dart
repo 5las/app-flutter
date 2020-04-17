@@ -16,4 +16,5 @@ class LoginResponse extends Equatable {
 
   @override
   List<Object> get props => [dni, email, district, fullname];
+
 }

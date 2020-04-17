@@ -1,3 +1,4 @@
+import 'package:app_5las/src/data/datasources/local_data_source.dart';
 import 'package:app_5las/src/data/datasources/remote_data_source.dart';
 import 'package:app_5las/src/data/repositories/auth_repository_impl.dart';
 import 'package:app_5las/src/data/repositories/onboarding_repository_impl.dart';
@@ -14,10 +15,14 @@ import 'package:app_5las/src/features/signup/presentation/bloc/signup_bloc.dart'
 import 'package:get_it/get_it.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 final serviceLocator = GetIt.instance;
 
 Future<void> init() async {
+  final sharedPreferences = await SharedPreferences.getInstance();
+  serviceLocator.registerLazySingleton(() => sharedPreferences);
+
   ///BLOCS
   serviceLocator.registerFactory(() => SignupBloc(getDistricts: serviceLocator()));
   serviceLocator.registerFactory(() => AuthBloc(loginAttempt: serviceLocator()));
@@ -34,7 +39,11 @@ Future<void> init() async {
   serviceLocator.registerLazySingleton<OnBoardingRepository>(() => OnBoardingRepositoryImpl(remoteDataSource: serviceLocator()));
 
   ///data sources
-  serviceLocator.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl(client: serviceLocator()));
+  serviceLocator.registerLazySingleton<RemoteDataSource>(
+      () => RemoteDataSourceImpl(client: serviceLocator()));
+
+  serviceLocator.registerLazySingleton<LocalDataSource>(
+      () => LocalDataSourceImpl(sharedPreferences: serviceLocator()));
 
   ///http client
   serviceLocator.registerLazySingleton(() => http.Client());

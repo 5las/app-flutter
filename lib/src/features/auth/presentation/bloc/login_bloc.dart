@@ -1,4 +1,3 @@
-import 'package:app_5las/src/features/auth/domain/entities/login_request.dart';
 import 'package:equatable/equatable.dart';
 import 'package:app_5las/src/core/error/failures.dart';
 import 'package:app_5las/src/features/auth/domain/entities/login_response.dart';
@@ -38,7 +37,7 @@ class  AuthBloc extends Bloc<AuthEvent, AuthState>{
       }
     }
 
-   if(event is  LoggedIn){
+   if(event is  LogInEvent){
         yield LoginLoading();
 
         final failureOrLogin = await loginAttempt.call(LoginParams(email: event.email,password: event.password));

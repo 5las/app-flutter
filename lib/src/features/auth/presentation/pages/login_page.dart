@@ -1,8 +1,10 @@
+import 'package:app_5las/src/commons/mixins/progress_overlay_mixin.dart';
 import 'package:app_5las/src/config/routes.dart';
 import 'package:app_5las/src/core/widgets/default_button.dart';
 import 'package:app_5las/src/core/widgets/default_input_decoration.dart';
 import 'package:app_5las/src/config/colors.dart';
 import 'package:app_5las/src/core/widgets/password_decoration.dart';
+import 'package:app_5las/src/core/widgets/progress_overlay.dart';
 import 'package:app_5las/src/core/widgets/shadowed_container.dart';
 import 'package:app_5las/src/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:app_5las/src/injection_container.dart';
@@ -16,8 +18,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-
+class _LoginPageState extends State<LoginPage> with ProgressOverlayMixin {
   AuthBloc _authBloc;
   bool _obscureText = true;
 
@@ -25,12 +26,27 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  ProgressOverlay _progressOverlay;
+
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
         statusBarColor: AppColors.white, statusBarBrightness: Brightness.dark));
     _authBloc = serviceLocator<AuthBloc>();
+    _progressOverlay = ProgressOverlay();
     super.initState();
+  }
+
+  @override
+  void showProgress() {
+    super.showProgress();
+    _progressOverlay.show(context);
+  }
+
+  @override
+  void hideProgress() {
+    super.hideProgress();
+    _progressOverlay.hide();
   }
 
   @override
@@ -41,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
       value: SystemUiOverlayStyle(
           statusBarColor: AppColors.white,
           statusBarIconBrightness: Brightness.dark // transparent status bar
-      ),
+          ),
       child: BlocProvider(
         create: (_) => _authBloc,
         child: Scaffold(
@@ -60,22 +76,25 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   buildSignIn(BuildContext context, MediaQueryData _mediaQuery) {
-    return  BlocListener<AuthBloc,AuthState>(
-      listener: (context,state){
-        if(state is LoginFailure){
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is LoginFailure) {
+          hideProgress();
           Scaffold.of(context).showSnackBar(
             SnackBar(
               content: Text('${state.error}'),
               backgroundColor: AppColors.primaryColor,
             ),
           );
-        }
-        else if(state is LoginLoaded){
+        } else if (state is LoginLoading) {
+          showProgress();
+        } else if (state is LoginLoaded) {
+          hideProgress();
           Navigator.of(context).pushNamed(Router.onBoardingRoute);
         }
       },
       child: BlocBuilder<AuthBloc, AuthState>(
-        builder: (context, state){
+        builder: (context, state) {
           return Form(
             key: _loginKey,
             child: Column(
@@ -110,12 +129,11 @@ class _LoginPageState extends State<LoginPage> {
                     keyboardType: TextInputType.emailAddress,
                     controller: _emailController,
                     decoration: DefaultInputDecoration(
-                        hintText: 'Correo',
-                        suffixIconData: Icons.person),
-                    validator: (emailValue){
-                      if(!emailValue.contains('@')){
+                        hintText: 'Correo', suffixIconData: Icons.person),
+                    validator: (emailValue) {
+                      if (!emailValue.contains('@')) {
                         return 'Por favor verifique su correo';
-                      }else{
+                      } else {
                         return null;
                       }
                     },
@@ -129,9 +147,9 @@ class _LoginPageState extends State<LoginPage> {
                     obscureText: _obscureText,
                     controller: _passwordController,
                     validator: (passwordValue) {
-                      if(passwordValue.isEmpty && passwordValue.length < 6){
+                      if (passwordValue.isEmpty && passwordValue.length < 6) {
                         return 'Por favor verifique su contraseña';
-                      }else {
+                      } else {
                         return null;
                       }
                     },
@@ -158,34 +176,18 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Align(
                     alignment: Alignment.center,
-                    child: (state is LoginLoading)
-                        ?DefaultButton(
-                      backgroundColor: AppColors.primaryColor,
-                      widget:  Center(
-                       child: SizedBox(
-                              height: 22,
-                              width: 22,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation(
-                                    AppColors.white),
-                              ))
-                      ),
-                      onPressed: (){
-                      },
-                    ) :
-                    DefaultButton(
+                    child: DefaultButton(
                       backgroundColor: AppColors.primaryColor,
                       textColor: AppColors.white,
                       text: 'INGRESAR',
-                      onPressed: (){
+                      onPressed: () {
                         final isValid = _loginKey.currentState.validate();
-                        if(isValid){
-                          state is! LoginLoading ? BlocProvider.of<AuthBloc>(context).add(
-                              LoggedIn(_emailController.text,_passwordController.text)):null;
+                        if (isValid) {
+                          BlocProvider.of<AuthBloc>(context).add(LogInEvent(
+                              _emailController.text, _passwordController.text));
                         }
                       },
-                    )
-                ),
+                    )),
                 SizedBox(
                   height: _mediaQuery.size.height * 0.03,
                 ),
@@ -283,5 +285,4 @@ class _LoginPageState extends State<LoginPage> {
       _obscureText = !_obscureText;
     });
   }
-
 }

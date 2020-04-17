@@ -1,7 +1,9 @@
 import 'package:app_5las/src/core/error/exceptions.dart';
 import 'package:app_5las/src/core/error/failures.dart';
+import 'package:app_5las/src/data/datasources/local_data_source.dart';
 import 'package:app_5las/src/data/datasources/remote_data_source.dart';
-import 'package:app_5las/src/features/auth/domain/entities/login_request.dart';
+import 'package:app_5las/src/data/models/auth/login_data_model.dart';
+import 'package:app_5las/src/data/models/auth/user_district_model.dart';
 import 'package:app_5las/src/features/auth/domain/entities/login_response.dart';
 import 'package:app_5las/src/features/auth/domain/entities/user_district.dart';
 import 'package:app_5las/src/features/auth/domain/repositories/login_repository.dart';
@@ -12,24 +14,24 @@ import 'package:flutter/foundation.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final RemoteDataSource remoteDataSource;
+  final LocalDataSource localDataSource;
 
-  AuthRepositoryImpl({@required this.remoteDataSource});
+  AuthRepositoryImpl(
+      {@required this.remoteDataSource, @required this.localDataSource});
 
   @override
-  Future<Either<Failure, LoginResponse>> tryLogin(LoginParams loginParams) async {
+  Future<Either<Failure, LoginResponse>> tryLogin(
+      LoginParams loginParams) async {
     final jwtParser = JwtUtils();
 
     try {
-      final loginResponseModel =
-          await remoteDataSource.login(loginParams);
+      final loginResponseModel = await remoteDataSource.login(loginParams);
+      //grabamos el token
+      await localDataSource.cacheSessionToken(loginResponseModel.accessToken);
       final parsedData = jwtParser.parseJWT(loginResponseModel.accessToken);
-      final loginResponse = LoginResponse(
-          dni: parsedData['dni'],
-          email: parsedData['email'],
-          fullname: parsedData['fullname'],
-          district: UserDistrict(
-              id: parsedData['district']['id'],
-              name: parsedData['district']['name']));
+      final loginResponse = LoginDataModel.fromJson(parsedData);
+      //grabamos los datos de la sesión
+      await localDataSource.cacheSessionData(loginResponse);
       return Right(loginResponse);
     } on ServerException {
       return Left(ServerFailure());
