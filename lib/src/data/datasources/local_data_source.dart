@@ -8,11 +8,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class LocalDataSource {
   Future<LoginResponse> getSessionData();
+  Future<String> getSessionToken();
 
   Future<bool> cacheSessionData(LoginResponse loginData);
+
+  Future<bool> cacheSessionToken(String token);
 }
 
 const CACHED_USER_SESSION = 'CACHED_USER_SESSION';
+const CACHED_SESSION_TOKEN = 'CACHED_SESSION_TOKEN';
 
 class LocalDataSourceImpl implements LocalDataSource {
   final SharedPreferences sharedPreferences;
@@ -34,5 +38,15 @@ class LocalDataSourceImpl implements LocalDataSource {
     } else {
       throw CacheException();
     }
+  }
+
+  @override
+  Future<bool> cacheSessionToken(String token) {
+    return sharedPreferences.setString(CACHED_SESSION_TOKEN, token);
+  }
+
+  @override
+  Future<String> getSessionToken() {
+    return Future.value(sharedPreferences.getString(CACHED_SESSION_TOKEN));
   }
 }
