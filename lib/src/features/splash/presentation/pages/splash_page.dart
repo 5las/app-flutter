@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:core';
+
 import 'package:app_5las/src/core/widgets/default_button.dart';
 import 'package:app_5las/src/config/colors.dart';
 import 'package:app_5las/src/config/routes.dart';
@@ -13,13 +16,22 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+
   @override
-  Widget build(BuildContext context) {
-    var _mediaQuery = MediaQuery.of(context);
+  void initState() {
     FlutterStatusbarcolor.setStatusBarColor(AppColors.primaryColor);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
       statusBarIconBrightness: Brightness.light,
     ));
+    Timer( Duration(seconds: 5), (){
+      Navigator.of(context).pushReplacementNamed(Router.loginRoute);
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var _mediaQuery = MediaQuery.of(context);
 
     return Scaffold(
       body: Container(

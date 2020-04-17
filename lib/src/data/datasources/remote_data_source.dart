@@ -14,6 +14,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
+import '../../core/utils/session.dart';
+
 const API_URL = 'https://5las.renatocenteno.com';
 
 abstract class RemoteDataSource {
@@ -30,6 +32,7 @@ abstract class RemoteDataSource {
 
 class RemoteDataSourceImpl implements RemoteDataSource {
   final http.Client client;
+  final Session _session = Session();
 
   RemoteDataSourceImpl({@required this.client});
 
