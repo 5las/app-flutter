@@ -58,7 +58,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      '${state.fullname}',
+                      '${state.sessionData.fullname}',
                       textAlign: TextAlign.start,
                       style: TextStyle(
                           color: AppColors.white,

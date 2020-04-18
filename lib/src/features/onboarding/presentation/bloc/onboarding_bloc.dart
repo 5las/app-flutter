@@ -50,12 +50,9 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent,OnBoardingState>{
       final failureOrUSerData = await getUserData.call(NoParams());
       yield failureOrUSerData.fold(
               (failure) => OnBoardingFailure(error: _mapFailureToMessage(failure)),
-              (loginResponse) => OnBoardingLoaded(
-                  dni: event.dni,
-                  email: event.email,
-                  fullname: event.fullname));
+              (loginResponse) => OnBoardingLoaded(sessionData: loginResponse));
     }
-
+  /*
     if (event is DistrictEvent) {
       yield OnBoardingLoading();
       final failureOrDistricts = await getDistricts.call(DistrictsParams(departmentId: 1501));
@@ -63,6 +60,7 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent,OnBoardingState>{
               (failure) => OnBoardingFailure(error: _mapFailureToMessage(failure)),
               (districts) => OnBoardingLoaded(districts: districts));
     }
+  */
   }
 }
 
