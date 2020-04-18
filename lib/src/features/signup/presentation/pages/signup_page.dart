@@ -17,6 +17,9 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   SignupBloc _signUpBloc;
 
+  String _selectedDistrict;
+  String _selectedGender;
+
   @override
   void initState() {
     super.initState();
@@ -94,7 +97,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   fontSize: 16.0, color: AppColors.black),
                               decoration: DefaultInputDecoration(
                                   hintText: 'DNI/CE',
-                                  prefixIconData: Icons.person),
+                                  prefixIconData: Icons.assignment_ind),
                             ),
                           ),
                           Container(
@@ -111,38 +114,85 @@ class _SignUpPageState extends State<SignUpPage> {
                                   fontSize: 16.0, color: AppColors.black),
                               decoration: DefaultInputDecoration(
                                   hintText: 'Dirección',
-                                  prefixIconData: Icons.person),
+                                  prefixIconData: Icons.place),
                             ),
                           ),
                           BlocBuilder<SignupBloc, SignupState>(
                             builder: (context, state) {
                               if (state is SignUpInitial) {
-                                return Text('EMPTY');
+                                return Container();
                               } else if (state is SignUpLoaded) {
-                                state.districts.forEach((d) {
-                                  print(d.name);
-                                });
-                                return Text('MIRA EL LOG :D');
+                                return Container(
+                                  height: 60,
+                                  child: DropdownButtonFormField(
+                                    isDense: true,
+                                    value: _selectedDistrict,
+                                    validator: (value) {
+                                      if (value == null || value == '') {
+                                        return 'Por favor complete este campo';
+                                      }
+                                      return null;
+                                    },
+                                    icon: Padding(
+                                        padding: EdgeInsets.only(right: 10),
+                                        child: Icon(
+                                          Icons.keyboard_arrow_down,
+                                          color: AppColors.primaryColor,
+                                        )),
+                                    items: state.districts.map((district) {
+                                      return DropdownMenuItem(
+                                        value: district.id,
+                                        child: FittedBox(
+                                            child: Text(district.name)),
+                                      );
+                                    }).toList(),
+                                    decoration: DefaultInputDecoration(
+                                        hintText: 'Distrito',
+                                        prefixIconData: Icons.map),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _selectedDistrict = value;
+                                      });
+                                    },
+                                  ),
+                                );
                               } else if (state is SignUpLoading) {
-                                return Text('CARGANDO DISTRITOS');
+                                return Container();
                               }
                             },
                           ),
                           Container(
                             height: 60.0,
-                            child: TextFormField(
-                              autofocus: false,
+                            child: DropdownButtonFormField(
+                              isDense: true,
+                              value: _selectedGender,
                               validator: (value) {
-                                if (value.isEmpty) {
+                                if (value == null || value == '') {
                                   return 'Por favor complete este campo';
                                 }
                                 return null;
                               },
-                              style: TextStyle(
-                                  fontSize: 16.0, color: AppColors.black),
+                              icon: Padding(
+                                  padding: EdgeInsets.only(right: 10),
+                                  child: Icon(
+                                    Icons.keyboard_arrow_down,
+                                    color: AppColors.primaryColor,
+                                  )),
+                              items: ['Mujer', 'Hombre'].map((gender) {
+                                return DropdownMenuItem(
+                                  value: gender,
+                                  child: FittedBox(
+                                    child: Text(gender),
+                                  ),
+                                );
+                              }).toList(),
                               decoration: DefaultInputDecoration(
-                                  hintText: 'Distrito',
-                                  prefixIconData: Icons.person),
+                                  hintText: 'Me identifico como', prefixIconData: Icons.person_pin),
+                              onChanged: (value) {
+                                setState(() {
+                                  _selectedGender = value;
+                                });
+                              },
                             ),
                           ),
                           Container(
@@ -159,7 +209,24 @@ class _SignUpPageState extends State<SignUpPage> {
                                   fontSize: 16.0, color: AppColors.black),
                               decoration: DefaultInputDecoration(
                                   hintText: 'Email',
-                                  prefixIconData: Icons.person),
+                                  prefixIconData: Icons.alternate_email),
+                            ),
+                          ),
+                          Container(
+                            height: 60.0,
+                            child: TextFormField(
+                              autofocus: false,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Por favor complete este campo';
+                                }
+                                return null;
+                              },
+                              style: TextStyle(
+                                  fontSize: 16.0, color: AppColors.black),
+                              decoration: DefaultInputDecoration(
+                                  hintText: 'Contraseña',
+                                  prefixIconData: Icons.lock),
                             ),
                           ),
                           SizedBox(
