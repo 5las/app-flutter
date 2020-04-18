@@ -1,7 +1,8 @@
 import 'package:app_5las/src/core/error/exceptions.dart';
 import 'package:app_5las/src/core/error/failures.dart';
+import 'package:app_5las/src/data/datasources/local_data_source.dart';
 import 'package:app_5las/src/data/datasources/remote_data_source.dart';
-import 'package:app_5las/src/data/models/auth/response/login_response_model.dart';
+import 'package:app_5las/src/data/models/auth/login_response_model.dart';
 import 'package:app_5las/src/features/auth/domain/entities/login_response.dart';
 import 'package:app_5las/src/features/onboarding/domain/entities/company.dart';
 import 'package:app_5las/src/features/onboarding/domain/entities/district.dart';
@@ -15,13 +16,15 @@ class OnBoardingRepositoryImpl implements OnBoardingRepository{
 
   final RemoteDataSource remoteDataSource;
   final LoginResponseModel responseModel;
-  OnBoardingRepositoryImpl({@required this.remoteDataSource, this.responseModel});
+  final LocalDataSource localDataSource;
+  OnBoardingRepositoryImpl({this.localDataSource, @required this.remoteDataSource, this.responseModel});
 
   @override
   Future<Either<Failure, List<Company>>> getCompany(getCompany) async {
     try {
+      final token = await localDataSource.getSessionToken();
       final companies =
-      await remoteDataSource.getCompaniesByDistrict( responseModel.accessToken,getCompany);
+      await remoteDataSource.getCompaniesByDistrict(token,getCompany);
       return Right(companies);
     } on ServerException {
       return Left(ServerFailure());
@@ -37,10 +40,20 @@ class OnBoardingRepositoryImpl implements OnBoardingRepository{
   @override
   Future<Either<Failure, Ticket>> getTicket(generateTicketParams) async {
     try {
+      final token = await localDataSource.getSessionToken();
       final tickets =
-          await remoteDataSource.postGenerateTicket(responseModel.accessToken,generateTicketParams);
+          await remoteDataSource.postGenerateTicket(token,generateTicketParams);
       return Right(tickets);
     } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, LoginResponse>> getUserData(getUserDataParams)async{
+    try {
+      final localData = await localDataSource.getSessionData();
+      return Right(localData);
+    } on ServerException{
       return Left(ServerFailure());
     }
   }

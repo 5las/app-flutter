@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:app_5las/src/core/error/exceptions.dart';
-import 'package:app_5las/src/data/models/auth/response/login_response_model.dart';
+import 'package:app_5las/src/data/models/auth/login_response_model.dart';
 import 'package:app_5las/src/data/models/company_model.dart';
 import 'package:app_5las/src/data/models/generateticket/ticket_reponse_model.dart';
 import 'package:app_5las/src/data/models/signup/district_model.dart';
@@ -14,7 +14,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
-import '../../core/utils/session.dart';
 
 const API_URL = 'https://5las.renatocenteno.com';
 
@@ -32,7 +31,6 @@ abstract class RemoteDataSource {
 
 class RemoteDataSourceImpl implements RemoteDataSource {
   final http.Client client;
-  final Session _session = Session();
 
   RemoteDataSourceImpl({@required this.client});
 

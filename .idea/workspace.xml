@@ -7,11 +7,18 @@
     <list default="true" id="3f19a9b7-2c1e-4da0-b6ae-6b285b43dcfa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable/launch_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable/launch_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/core/utils/session.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/data/datasources/local_data_source.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/data/datasources/local_data_source.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/data/datasources/remote_data_source.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/data/datasources/remote_data_source.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/splash/presentation/pages/splash_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/splash/presentation/pages/splash_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/data/repositories/auth_repository_impl.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/data/repositories/auth_repository_impl.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/data/repositories/onboarding_repository_impl.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/data/repositories/onboarding_repository_impl.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/domain/repositories/onboarding_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/domain/repositories/onboarding_repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/bloc/onboarding_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/bloc/onboarding_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/bloc/onboarding_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/bloc/onboarding_event.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/bloc/onboarding_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/bloc/onboarding_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/pages/onboarding_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/pages/onboarding_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/injection_container.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/injection_container.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,12 +26,12 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="8_Foldable_API_29" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="KPSDU18904007277" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Dart File" />
         <option value="valueResourceFile" />
+        <option value="Dart File" />
       </list>
     </option>
   </component>

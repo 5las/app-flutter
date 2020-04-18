@@ -1,4 +1,6 @@
 import 'package:app_5las/src/core/widgets/default_button.dart';
+import 'package:app_5las/src/data/datasources/local_data_source.dart';
+import 'package:app_5las/src/features/auth/domain/entities/login_response.dart';
 import 'package:app_5las/src/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:app_5las/src/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:app_5las/src/features/onboarding/presentation/widgets/nav_drawer.dart';
@@ -15,6 +17,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardingPage extends StatefulWidget {
   @override
@@ -26,7 +29,6 @@ List cardSlider = [1, 2, 3];
 class _OnBoardingPageState extends State<OnBoardingPage> {
 
   OnBoardingBloc _onBoardingBloc;
-  AuthBloc _authBloc;
 
   @override
   void initState() {
@@ -35,8 +37,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       statusBarIconBrightness: Brightness.light,
     ));
     _onBoardingBloc = serviceLocator<OnBoardingBloc>();
-    _authBloc       = serviceLocator<AuthBloc>();
     _onBoardingBloc.add(DistrictEvent(departmentId: 1501));
+    _onBoardingBloc.add(UserDataEvent());
     super.initState();
   }
 
@@ -45,153 +47,150 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
     return BlocProvider(
       create: (_) => _onBoardingBloc,
-      child: BlocProvider(
-        create: (_) => _authBloc,
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: AppColors.primaryColor,
-            title: BlocBuilder<AuthBloc, AuthState>(
-              builder:(context, state) {
-                if(state is LoginLoaded){
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '${state.loginResponse.fullname}',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 22.0,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '${state.loginResponse.district.name}',
-                        style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 19.0,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  );
-                }
-                else{
-                  return Container(child: null,);
-                }
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppColors.primaryColor,
+          title: BlocBuilder<OnBoardingBloc, OnBoardingState>(
+            builder:(context, state) {
+              if(state is OnBoardingLoaded){
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      '${state.fullname}',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Lima - Barranco',
+                      style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 19.0,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                );
+              }
+              else{
+                return Container(child: null,);
+              }
 
-              },
-            ),
-            elevation: 0.0,
+            },
           ),
-          drawer: NavDrawer(),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    height: 22.0,
-                  ),
-                  Text(
-                    '¿Dónde quieres comprar?',
-                    style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 32.0,
-                  ),
-                  Text(
-                    "Departamento/Provincia* ",
-                    style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.backgroundColorComboBox,
-                      borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(20.0),
-                        topRight: const Radius.circular(20.0),
-                        bottomLeft: const Radius.circular(20.0),
-                        bottomRight: const Radius.circular(20.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 19.0),
-                      child: DropDownDepartments(),
+          elevation: 0.0,
+        ),
+        drawer: NavDrawer(),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(
+                  height: 22.0,
+                ),
+                Text(
+                  '¿Dónde quieres comprar?',
+                  style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 32.0,
+                ),
+                Text(
+                  "Departamento/Provincia* ",
+                  style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.backgroundColorComboBox,
+                    borderRadius: BorderRadius.only(
+                      topLeft: const Radius.circular(20.0),
+                      topRight: const Radius.circular(20.0),
+                      bottomLeft: const Radius.circular(20.0),
+                      bottomRight: const Radius.circular(20.0),
                     ),
                   ),
-                  SizedBox(
-                    height: 16.0,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                    child: DropDownDepartments(),
                   ),
-                  Text(
-                    "Distrito* ",
-                    style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.backgroundColorComboBox,
-                      borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(20.0),
-                        topRight: const Radius.circular(20.0),
-                        bottomLeft: const Radius.circular(20.0),
-                        bottomRight: const Radius.circular(20.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 19.0),
-                      child: DropDownDistricts(),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 16.0,
-                  ),
-                  Text(
-                    "Elija un establecimiento* ",
-                    style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.backgroundColorComboBox,
-                      borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(20.0),
-                        topRight: const Radius.circular(20.0),
-                        bottomLeft: const Radius.circular(20.0),
-                        bottomRight: const Radius.circular(20.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 19.0),
-                      child: DropDownEstablishment(),
+                ),
+                SizedBox(
+                  height: 16.0,
+                ),
+                Text(
+                  "Distrito* ",
+                  style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.backgroundColorComboBox,
+                    borderRadius: BorderRadius.only(
+                      topLeft: const Radius.circular(20.0),
+                      topRight: const Radius.circular(20.0),
+                      bottomLeft: const Radius.circular(20.0),
+                      bottomRight: const Radius.circular(20.0),
                     ),
                   ),
-                  SizedBox(
-                    height: 18.0,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                    child: DropDownDistricts(),
                   ),
-                  Container(child: cardsSlider()),
-                  SizedBox(
-                    height: 18.0,
+                ),
+                SizedBox(
+                  height: 16.0,
+                ),
+                Text(
+                  "Elija un establecimiento* ",
+                  style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.backgroundColorComboBox,
+                    borderRadius: BorderRadius.only(
+                      topLeft: const Radius.circular(20.0),
+                      topRight: const Radius.circular(20.0),
+                      bottomLeft: const Radius.circular(20.0),
+                      bottomRight: const Radius.circular(20.0),
+                    ),
                   ),
-                  DefaultButton(
-                    backgroundColor: AppColors.primaryColor,
-                    textColor: AppColors.white,
-                    text: 'ELEGIR HORARIO',
-                    onPressed: () {
-                      buildDialogSelectSchedule(context);
-                    },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                    child: DropDownEstablishment(),
                   ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 18.0,
+                ),
+                Container(child: cardsSlider()),
+                SizedBox(
+                  height: 18.0,
+                ),
+                DefaultButton(
+                  backgroundColor: AppColors.primaryColor,
+                  textColor: AppColors.white,
+                  text: 'ELEGIR HORARIO',
+                  onPressed: () {
+                    buildDialogSelectSchedule(context);
+                  },
+                ),
+              ],
             ),
           ),
         ),
@@ -547,4 +546,5 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       )
     ]);
   }
+
 }

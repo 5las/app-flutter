@@ -4,6 +4,7 @@ import 'package:app_5las/src/core/error/exceptions.dart';
 import 'package:app_5las/src/data/models/auth/login_data_model.dart';
 import 'package:app_5las/src/features/auth/domain/entities/login_response.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class LocalDataSource {
@@ -12,7 +13,7 @@ abstract class LocalDataSource {
 
   Future<bool> cacheSessionData(LoginResponse loginData);
 
-  Future<bool> cacheSessionToken(String token);
+    cacheSessionToken(String token);
 }
 
 const CACHED_USER_SESSION = 'CACHED_USER_SESSION';
@@ -20,6 +21,7 @@ const CACHED_SESSION_TOKEN = 'CACHED_SESSION_TOKEN';
 
 class LocalDataSourceImpl implements LocalDataSource {
   final SharedPreferences sharedPreferences;
+  final storage = FlutterSecureStorage();
 
   LocalDataSourceImpl({@required this.sharedPreferences});
 
@@ -40,13 +42,21 @@ class LocalDataSourceImpl implements LocalDataSource {
     }
   }
 
-  @override
-  Future<bool> cacheSessionToken(String token) {
-    return sharedPreferences.setString(CACHED_SESSION_TOKEN, token);
+   cacheSessionToken(String token)async {
+    final data ={
+      'accessToken': token
+    };
+   await storage.write(key: CACHED_SESSION_TOKEN, value: jsonEncode(data));
+     //return sharedPreferences.setString(CACHED_SESSION_TOKEN, token);
   }
 
   @override
-  Future<String> getSessionToken() {
-    return Future.value(sharedPreferences.getString(CACHED_SESSION_TOKEN));
+  Future<String> getSessionToken() async{
+    final result = await storage.read(key: CACHED_SESSION_TOKEN);
+    if(result!=null){
+      return jsonDecode(result);
+    }
+    return null;
+    //return Future.value(sharedPreferences.getString(CACHED_SESSION_TOKEN));
   }
 }

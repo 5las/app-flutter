@@ -13,3 +13,17 @@ class DistrictEvent extends OnBoardingEvent{
   @override
   List<Object> get props => [departmentId];
 }
+
+
+class UserDataEvent extends OnBoardingEvent{
+  final String dni;
+  final String email;
+  final String fullname;
+  UserDataEvent({this.dni,this.email,this.fullname});
+
+  @override
+  List<Object> get props => [dni,email,fullname];
+
+
+
+}

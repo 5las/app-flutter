@@ -8,6 +8,7 @@ import 'package:app_5las/src/features/auth/domain/usecases/login_attempt.dart';
 import 'package:app_5las/src/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:app_5las/src/features/onboarding/domain/repositories/onboarding_repository.dart';
 import 'package:app_5las/src/features/onboarding/domain/usecases/get_districts.dart';
+import 'package:app_5las/src/features/onboarding/domain/usecases/get_user_data.dart';
 import 'package:app_5las/src/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:app_5las/src/features/signup/domain/repositories/signup_repository.dart';
 import 'package:app_5las/src/features/signup/domain/usecases/get_districts.dart';
@@ -26,17 +27,18 @@ Future<void> init() async {
   ///BLOCS
   serviceLocator.registerFactory(() => SignupBloc(getDistricts: serviceLocator()));
   serviceLocator.registerFactory(() => AuthBloc(loginAttempt: serviceLocator()));
-  serviceLocator.registerFactory(() => OnBoardingBloc(getDistricts: serviceLocator()));
+  serviceLocator.registerFactory(() => OnBoardingBloc( getUserData: serviceLocator() ,getDistricts: serviceLocator()));
 
   ///use cases
   serviceLocator.registerLazySingleton(() => GetDistricts(signUpRepository: serviceLocator()));
   serviceLocator.registerLazySingleton(() => LoginAttempt(authRepository: serviceLocator()));
   serviceLocator.registerLazySingleton(() => GetDistrict(onBoardingRepository: serviceLocator()));
+  serviceLocator.registerLazySingleton(() => GetUserData(onBoardingRepository: serviceLocator()));
 
   ///repositories
   serviceLocator.registerLazySingleton<SignUpRepository>(() => SignUpRepositoryImpl(remoteDataSource: serviceLocator()));
-  serviceLocator.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(remoteDataSource: serviceLocator()));
-  serviceLocator.registerLazySingleton<OnBoardingRepository>(() => OnBoardingRepositoryImpl(remoteDataSource: serviceLocator()));
+  serviceLocator.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(localDataSource: serviceLocator(), remoteDataSource: serviceLocator()));
+  serviceLocator.registerLazySingleton<OnBoardingRepository>(() => OnBoardingRepositoryImpl(localDataSource: serviceLocator(), remoteDataSource: serviceLocator()));
 
   ///data sources
   serviceLocator.registerLazySingleton<RemoteDataSource>(

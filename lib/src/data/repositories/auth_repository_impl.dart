@@ -26,11 +26,11 @@ class AuthRepositoryImpl implements AuthRepository {
 
     try {
       final loginResponseModel = await remoteDataSource.login(loginParams);
-      //grabamos el token
+      /// Saved token
       await localDataSource.cacheSessionToken(loginResponseModel.accessToken);
       final parsedData = jwtParser.parseJWT(loginResponseModel.accessToken);
       final loginResponse = LoginDataModel.fromJson(parsedData);
-      //grabamos los datos de la sesión
+      /// Saved session data
       await localDataSource.cacheSessionData(loginResponse);
       return Right(loginResponse);
     } on ServerException {

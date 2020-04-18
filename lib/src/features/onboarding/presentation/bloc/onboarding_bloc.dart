@@ -1,11 +1,16 @@
 import 'dart:async';
 
+import 'package:app_5las/src/core/usecases/usecase.dart';
+import 'package:app_5las/src/data/datasources/local_data_source.dart';
+import 'package:app_5las/src/features/auth/domain/entities/login_response.dart';
 import 'package:app_5las/src/features/onboarding/domain/entities/district.dart';
 import 'package:app_5las/src/core/error/failures.dart';
 import 'package:app_5las/src/features/onboarding/domain/usecases/get_districts.dart';
+import 'package:app_5las/src/features/onboarding/domain/usecases/get_user_data.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'onboarding_event.dart';
 part 'onboarding_state.dart';
@@ -17,8 +22,11 @@ const String INVALID_INPUT_FAILURE_MESSAGE =
 
 class OnBoardingBloc extends Bloc<OnBoardingEvent,OnBoardingState>{
   final GetDistrict getDistricts;
+  final GetUserData getUserData;
 
-  OnBoardingBloc({@required this.getDistricts});
+  final LocalDataSource localDataSource;
+
+  OnBoardingBloc({this.localDataSource,@required this.getUserData,@required this.getDistricts});
 
   @override
   OnBoardingState get initialState => OnBoardingInitial();
@@ -37,11 +45,20 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent,OnBoardingState>{
       }
     }
 
+    if(event is UserDataEvent){
+      yield OnBoardingLoading();
+      final failureOrUSerData = await getUserData.call(NoParams());
+      yield failureOrUSerData.fold(
+              (failure) => OnBoardingFailure(error: _mapFailureToMessage(failure)),
+              (loginResponse) => OnBoardingLoaded(
+                  dni: event.dni,
+                  email: event.email,
+                  fullname: event.fullname));
+    }
+
     if (event is DistrictEvent) {
       yield OnBoardingLoading();
-      final failureOrDistricts =
-      await getDistricts.call(DistrictsParams(departmentId: 1501));
-
+      final failureOrDistricts = await getDistricts.call(DistrictsParams(departmentId: 1501));
       yield failureOrDistricts.fold(
               (failure) => OnBoardingFailure(error: _mapFailureToMessage(failure)),
               (districts) => OnBoardingLoaded(districts: districts));
