@@ -28,7 +28,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
           await getDistricts.call(GetDistrictsParams(departmentId: 1501));
       //ACA DEBERIAMOS MANEJAR ERRORES, DESPUES LO HAGO
       yield failureOrDistricts.fold(
-          (failure) => null, //FALTA IMPLEMENTAR ERRORES
+          (failure) => SignUpError(), //FALTA IMPLEMENTAR ERRORES
           (districts) => SignUpLoaded(districts: districts));
     }
   }
