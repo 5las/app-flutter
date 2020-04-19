@@ -3,6 +3,7 @@ import 'package:app_5las/src/core/widgets/default_input_decoration.dart';
 import 'package:app_5las/src/config/colors.dart';
 import 'package:app_5las/src/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:app_5las/src/features/onBoarding/presentation/widgets/districts_aux.dart';
+import 'package:app_5las/src/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:app_5las/src/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,31 +16,50 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
 
+  ProfileBloc _profileBloc;
+
+  @override
+  void initState() {
+    _profileBloc = serviceLocator<ProfileBloc>();
+    _profileBloc.add(ProfileDataEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
         statusBarColor: AppColors.white, statusBarBrightness: Brightness.dark));
     var _mediaQuery = MediaQuery.of(context);
-    return AnnotatedRegion(
-      value: SystemUiOverlayStyle(
-          statusBarColor: AppColors.white,
-          statusBarIconBrightness: Brightness.dark// transparent status bar
-      ),
-      child: Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(_mediaQuery.size.width * 0.05),
-            child: SingleChildScrollView(
-              child: buildProfile(context, _mediaQuery),
-            ),
-          ),
-        ),
+    return BlocProvider(
+      create: (_) => _profileBloc,
+      child: BlocBuilder<ProfileBloc, ProfileState>(
+        builder: (context, state){
+          if(state is ProfileLoaded){
+            return AnnotatedRegion(
+              value: SystemUiOverlayStyle(
+                  statusBarColor: AppColors.white,
+                  statusBarIconBrightness: Brightness.dark// transparent status bar
+              ),
+              child: Scaffold(
+                body: SafeArea(
+                  child: Padding(
+                    padding: EdgeInsets.all(_mediaQuery.size.width * 0.05),
+                    child: SingleChildScrollView(
+                      child: buildProfile(context, _mediaQuery, state),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }else{
+            return Container(child: null,);
+          }
+        },
       ),
     );
   }
 
-  buildProfile(BuildContext context, MediaQueryData _mediaQuery ) {
+  buildProfile(BuildContext context, MediaQueryData _mediaQuery, ProfileLoaded state ) {
     return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
             autofocus: false,
             style: TextStyle(fontSize: 22.0, color: AppColors.black),
             decoration: DefaultInputDecoration(
-                hintText: 'Usuario'),
+                hintText: '${state.sessionData.fullname}'),
             validator: (value){
               if(value.isEmpty){
                 return 'Por favor complete este campo';
@@ -85,7 +105,7 @@ class _ProfilePageState extends State<ProfilePage> {
             autofocus: false,
             style: TextStyle(fontSize: 22.0, color: AppColors.black),
             decoration: DefaultInputDecoration(
-                hintText: 'Tipo de documento'),
+                hintText: 'DNI: ${state.sessionData.dni}'),
           ),
         ),
         Container(
@@ -100,6 +120,16 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         Container(
           height: 60.0,
+          child: TextFormField(
+            autofocus: false,
+            style: TextStyle(fontSize: 22.0, color: AppColors.black),
+            decoration: DefaultInputDecoration(
+                hintText: '${state.sessionData.district.name}'
+            ),
+          ),
+        ),
+        /*Container(
+          height: 60.0,
           decoration: BoxDecoration(
             color: AppColors.backgroundColorComboBox,
             borderRadius: BorderRadius.only(
@@ -113,7 +143,7 @@ class _ProfilePageState extends State<ProfilePage> {
             padding: const EdgeInsets.symmetric(horizontal:19.0),
             child: DropDownDistricts(),
           ),
-        ),
+        ),*/
         SizedBox(
           height: _mediaQuery.size.height * 0.02,
         ),
@@ -123,7 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
             autofocus: false,
             style: TextStyle(fontSize: 22.0, color: AppColors.black),
             decoration: DefaultInputDecoration(
-                hintText: 'Correo'),
+                hintText: '${state.sessionData.email}'),
           ),
         ),
         Container(

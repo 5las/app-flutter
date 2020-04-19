@@ -5,7 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'district_model.g.dart';
 
 @JsonSerializable()
-class DistrictModel extends District {
+class DistrictModel extends District  {
   DistrictModel({@required String id, @required String name})
       : super(id: id, name: name);
   

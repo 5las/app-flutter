@@ -1,6 +1,7 @@
 import 'package:app_5las/src/features/auth/presentation/pages/login_page.dart';
 import 'package:app_5las/src/features/final/presentation/pages/final_page.dart';
 import 'package:app_5las/src/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:app_5las/src/features/profile/presentation/pages/profile_page.dart';
 import 'package:app_5las/src/features/qr/presentation/pages/qr_page.dart';
 import 'package:app_5las/src/features/signup/presentation/pages/signup_page.dart';
 import 'package:app_5las/src/features/splash/presentation/pages/splash_page.dart';
@@ -27,6 +28,9 @@ class Router {
       case onBoardingRoute:
         return createMaterialRoute(OnBoardingPage(), settings);
         break;
+      case profileRoute:
+        return createMaterialRoute(ProfilePage(), settings);
+        break;
       case qrRoute:
         return createMaterialRoute(QrPage(), settings);
         break;
@@ -44,6 +48,7 @@ class Router {
   static const String loginRoute = 'login';
   static const String splashRoute = 'splash';
   static const String signUpRoute = 'signup';
+  static const String profileRoute = 'profile';
   static const String qrRoute = 'qr';
   static const String timerRoute = 'timer';
   static const String finalRoute = 'final';

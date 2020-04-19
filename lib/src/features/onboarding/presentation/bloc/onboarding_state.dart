@@ -11,12 +11,13 @@ class OnBoardingLoading extends OnBoardingState{}
 
 class OnBoardingLoaded extends OnBoardingState{
   final LoginResponse sessionData;
+  final List<DistrictModel> districts;
 
-  OnBoardingLoaded({this.sessionData});
+  OnBoardingLoaded({this.sessionData, this.districts});
 
   @override
   // TODO: implement props
-  List<Object> get props => [sessionData];
+  List<Object> get props => [sessionData, districts];
 
 }
 
@@ -29,5 +30,5 @@ class OnBoardingFailure extends OnBoardingState{
   List<Object> get props => [error];
 
   @override
-  String toString() => 'LoginFailure { error: $error }';
+  String toString() => 'OnBoardingFailure { error: $error }';
 }

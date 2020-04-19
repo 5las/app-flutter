@@ -3,11 +3,13 @@ import 'package:app_5las/src/core/error/failures.dart';
 import 'package:app_5las/src/data/datasources/local_data_source.dart';
 import 'package:app_5las/src/data/datasources/remote_data_source.dart';
 import 'package:app_5las/src/data/models/auth/login_response_model.dart';
+import 'package:app_5las/src/data/models/signup/district_model.dart';
 import 'package:app_5las/src/features/auth/domain/entities/login_response.dart';
 import 'package:app_5las/src/features/onboarding/domain/entities/company.dart';
 import 'package:app_5las/src/features/onboarding/domain/entities/district.dart';
 import 'package:app_5las/src/features/onboarding/domain/entities/ticket.dart';
 import 'package:app_5las/src/features/onboarding/domain/repositories/onboarding_repository.dart';
+import 'package:app_5las/src/features/onboarding/domain/usecases/get_districts.dart';
 import 'package:app_5las/src/features/signup/domain/usecases/get_districts.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
@@ -32,9 +34,14 @@ class OnBoardingRepositoryImpl implements OnBoardingRepository{
   }
 
   @override
-  Future<Either<Failure, List<District>>> getDistrict(getDistricts) async {
-    // TODO: implement getDistrict
-    return null;
+  Future<Either<Failure, List<DistrictModel>>> getDistrict(DistrictsParams districtsParams) async {
+    try {
+      final districts =
+      await remoteDataSource.getDistricts(districtsParams.departmentId);
+      return Right(districts);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 
   @override

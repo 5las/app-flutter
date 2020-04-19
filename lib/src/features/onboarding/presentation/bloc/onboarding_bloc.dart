@@ -2,15 +2,16 @@ import 'dart:async';
 
 import 'package:app_5las/src/core/usecases/usecase.dart';
 import 'package:app_5las/src/data/datasources/local_data_source.dart';
+import 'package:app_5las/src/data/models/signup/district_model.dart';
 import 'package:app_5las/src/features/auth/domain/entities/login_response.dart';
+import 'package:app_5las/src/features/onboarding/domain/usecases/get_districts.dart';
 import 'package:app_5las/src/features/onboarding/domain/entities/district.dart';
 import 'package:app_5las/src/core/error/failures.dart';
-import 'package:app_5las/src/features/onboarding/domain/usecases/get_districts.dart';
 import 'package:app_5las/src/features/onboarding/domain/usecases/get_user_data.dart';
+import 'package:app_5las/src/features/onboarding/domain/entities/district.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'onboarding_event.dart';
 part 'onboarding_state.dart';
@@ -47,20 +48,38 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent,OnBoardingState>{
 
     if(event is UserDataEvent){
       yield OnBoardingLoading();
-      final failureOrUSerData = await getUserData.call(NoParams());
-      yield failureOrUSerData.fold(
-              (failure) => OnBoardingFailure(error: _mapFailureToMessage(failure)),
-              (loginResponse) => OnBoardingLoaded(sessionData: loginResponse));
+      try{
+
+        final failureOrUSerData = await getUserData.call(NoParams());
+        final failureOrDistricts = await getDistricts.call(DistrictsParams(departmentId: event.departmentId));
+
+        final sessionData   = failureOrUSerData.fold((failure){
+          return OnBoardingFailure(error: _mapFailureToMessage(failure));
+        },(sessionData){
+          return sessionData;
+        }
+        );
+        final distritcs     = failureOrDistricts.fold((failure){
+              return OnBoardingFailure(error: _mapFailureToMessage(failure));
+            },(district){
+          return district;
+        }
+        );
+
+
+        yield OnBoardingLoaded(sessionData: sessionData,districts: distritcs);
+      }catch(e){
+        yield OnBoardingFailure(error: _mapFailureToMessage(e));
+      }
     }
-  /*
-    if (event is DistrictEvent) {
+    /*if (event is DistrictEvent) {
       yield OnBoardingLoading();
-      final failureOrDistricts = await getDistricts.call(DistrictsParams(departmentId: 1501));
+      final failureOrDistricts = await getDistricts.call(DistrictsParams (departmentId: 1501));
       yield failureOrDistricts.fold(
               (failure) => OnBoardingFailure(error: _mapFailureToMessage(failure)),
               (districts) => OnBoardingLoaded(districts: districts));
     }
-  */
+  }*/
   }
 }
 
