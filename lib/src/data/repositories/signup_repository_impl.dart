@@ -27,8 +27,13 @@ class SignUpRepositoryImpl implements SignUpRepository {
   }
 
   @override
-  Future<Either<Failure, SignUpResponse>> signUp(SignUpParams signUpParams) {
-    // TODO: implement signUp
-    return null;
+  Future<Either<Failure, SignUpResponse>> signUp(
+      SignUpParams signUpParams) async {
+    try {
+      final signUpResponse = await remoteDataSource.signUp(signUpParams);
+      return Right(signUpResponse);
+    } on Exception {
+      return Left(ServerFailure());
+    }
   }
 }

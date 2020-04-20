@@ -3,6 +3,7 @@ import 'package:app_5las/src/config/colors.dart';
 import 'package:app_5las/src/core/widgets/default_button.dart';
 import 'package:app_5las/src/core/widgets/default_input_decoration.dart';
 import 'package:app_5las/src/core/widgets/progress_overlay.dart';
+import 'package:app_5las/src/features/signup/domain/usecases/signup.dart';
 import 'package:app_5las/src/features/signup/presentation/bloc/signup_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,7 +23,14 @@ class _SignUpPageState extends State<SignUpPage> with ProgressOverlayMixin {
   String _selectedDistrict;
   String _selectedGender;
 
+  TextEditingController _fullNameController = TextEditingController();
+  TextEditingController _docNumberController = TextEditingController();
+  TextEditingController _addressController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
   ProgressOverlay _progressOverlay;
+  static GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -47,7 +55,6 @@ class _SignUpPageState extends State<SignUpPage> with ProgressOverlayMixin {
   @override
   Widget build(BuildContext context) {
     var _mediaQuery = MediaQuery.of(context);
-    var _formKey = GlobalKey<FormState>();
 
     print('building');
 
@@ -66,17 +73,21 @@ class _SignUpPageState extends State<SignUpPage> with ProgressOverlayMixin {
             body: SizedBox.expand(
                 child: SingleChildScrollView(
                     child: SafeArea(
-                        child: Padding(
-              padding: EdgeInsets.all(_mediaQuery.size.width * 0.05),
-              child: BlocListener<SignupBloc, SignupState>(
-                  listener: (context, state) {
-                    if (state is SignUpLoading) {
-                      showProgress();
-                    } else if (state is SignUpLoaded) {
-                      hideProgress();
-                    }
-                  },
-                  child: SingleChildScrollView(
+              child: Padding(
+                  padding: EdgeInsets.all(_mediaQuery.size.width * 0.05),
+                  child: BlocListener<SignupBloc, SignupState>(
+                      listener: (context, state) {
+                        if (state is SignUpLoading) {
+                          showProgress();
+                        } else if (state is SignUpLoaded) {
+                          hideProgress();
+                        } else if (state is SignUpSuccess) {
+                          hideProgress();
+                        } else if (state is SignUpError) {
+                          hideProgress();
+                          print('error');
+                        }
+                      },
                       child: Form(
                           key: _formKey,
                           child: Column(
@@ -98,7 +109,7 @@ class _SignUpPageState extends State<SignUpPage> with ProgressOverlayMixin {
                                   Container(
                                     height: 60.0,
                                     child: TextFormField(
-                                      
+                                      controller: _fullNameController,
                                       validator: (value) {
                                         if (value.isEmpty) {
                                           return 'Por favor complete este campo';
@@ -116,7 +127,7 @@ class _SignUpPageState extends State<SignUpPage> with ProgressOverlayMixin {
                                   Container(
                                     height: 60.0,
                                     child: TextFormField(
-                                      
+                                      controller: _docNumberController,
                                       validator: (value) {
                                         if (value.isEmpty) {
                                           return 'Por favor complete este campo';
@@ -134,7 +145,7 @@ class _SignUpPageState extends State<SignUpPage> with ProgressOverlayMixin {
                                   Container(
                                     height: 60.0,
                                     child: TextFormField(
-                                      
+                                      controller: _addressController,
                                       validator: (value) {
                                         if (value.isEmpty) {
                                           return 'Por favor complete este campo';
@@ -194,6 +205,7 @@ class _SignUpPageState extends State<SignUpPage> with ProgressOverlayMixin {
                                       } else if (state is SignUpLoading) {
                                         return Container();
                                       }
+                                      return Container();
                                     },
                                   ),
                                   Container(
@@ -215,7 +227,7 @@ class _SignUpPageState extends State<SignUpPage> with ProgressOverlayMixin {
                                           )),
                                       items: ['Mujer', 'Hombre'].map((gender) {
                                         return DropdownMenuItem(
-                                          value: gender,
+                                          value: gender[0],
                                           child: FittedBox(
                                             child: Text(gender),
                                           ),
@@ -234,7 +246,7 @@ class _SignUpPageState extends State<SignUpPage> with ProgressOverlayMixin {
                                   Container(
                                     height: 60.0,
                                     child: TextFormField(
-                                      
+                                      controller: _emailController,
                                       validator: (value) {
                                         if (value.isEmpty) {
                                           return 'Por favor complete este campo';
@@ -253,7 +265,7 @@ class _SignUpPageState extends State<SignUpPage> with ProgressOverlayMixin {
                                   Container(
                                     height: 60.0,
                                     child: TextFormField(
-                                      
+                                      controller: _passwordController,
                                       validator: (value) {
                                         if (value.isEmpty) {
                                           return 'Por favor complete este campo';
@@ -281,12 +293,24 @@ class _SignUpPageState extends State<SignUpPage> with ProgressOverlayMixin {
                                     text: 'CREAR CUENTA',
                                     onPressed: () {
                                       if (_formKey.currentState.validate()) {
-                                        print('Valid signup form');
+                                        _signUpBloc.add(SignUpAttemptEvent(
+                                            signUpParams: SignUpParams(
+                                                address:
+                                                    _addressController.text,
+                                                fullname:
+                                                    _fullNameController.text,
+                                                dni: _docNumberController.text,
+                                                email: _emailController.text,
+                                                password:
+                                                    _passwordController.text,
+                                                gender: _selectedGender,
+                                                districtId: int.parse(
+                                                    _selectedDistrict))));
                                       }
                                     },
                                   ))
                             ],
                           )))),
-            ))))));
+            )))));
   }
 }

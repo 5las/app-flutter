@@ -7,6 +7,7 @@ import 'package:app_5las/src/features/auth/domain/usecases/login_attempt.dart';
 import 'package:app_5las/src/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:app_5las/src/features/signup/domain/repositories/signup_repository.dart';
 import 'package:app_5las/src/features/signup/domain/usecases/get_districts.dart';
+import 'package:app_5las/src/features/signup/domain/usecases/signup.dart';
 import 'package:app_5las/src/features/signup/presentation/bloc/signup_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -20,8 +21,8 @@ Future<void> init() async {
   serviceLocator.registerLazySingleton(() => sharedPreferences);
 
   ///BLOCS
-  serviceLocator
-      .registerFactory(() => SignupBloc(getDistricts: serviceLocator()));
+  serviceLocator.registerFactory(() => SignupBloc(
+      getDistrictsUseCase: serviceLocator(), signUpUseCase: serviceLocator()));
   serviceLocator
       .registerFactory(() => AuthBloc(loginAttempt: serviceLocator()));
 
@@ -30,6 +31,8 @@ Future<void> init() async {
       () => GetDistricts(signUpRepository: serviceLocator()));
   serviceLocator.registerLazySingleton(
       () => LoginAttempt(authRepository: serviceLocator()));
+  serviceLocator
+      .registerLazySingleton(() => SignUp(signUpRepository: serviceLocator()));
 
   ///repositories
   serviceLocator.registerLazySingleton<SignUpRepository>(
