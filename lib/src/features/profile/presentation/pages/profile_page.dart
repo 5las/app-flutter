@@ -1,7 +1,9 @@
 import 'package:app_5las/src/core/widgets/default_button.dart';
 import 'package:app_5las/src/core/widgets/default_input_decoration.dart';
 import 'package:app_5las/src/config/colors.dart';
+import 'package:app_5las/src/core/widgets/progress_overlay.dart';
 import 'package:app_5las/src/features/auth/presentation/bloc/login_bloc.dart';
+import 'package:app_5las/src/commons/mixins/progress_overlay_mixin.dart';
 import 'package:app_5las/src/features/onBoarding/presentation/widgets/districts_aux.dart';
 import 'package:app_5las/src/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:app_5las/src/injection_container.dart';
@@ -17,14 +19,15 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
 
   ProfileBloc _profileBloc;
+  ProgressOverlay _progressOverlay;
 
   @override
   void initState() {
     _profileBloc = serviceLocator<ProfileBloc>();
     _profileBloc.add(ProfileDataEvent());
+    _progressOverlay = ProgressOverlay();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(

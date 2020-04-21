@@ -8,6 +8,7 @@ import 'package:app_5las/src/features/auth/domain/repositories/login_repository.
 import 'package:app_5las/src/features/auth/domain/usecases/login_attempt.dart';
 import 'package:app_5las/src/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:app_5las/src/features/onboarding/domain/repositories/onboarding_repository.dart';
+import 'package:app_5las/src/features/onboarding/domain/usecases/get_companies.dart';
 import 'package:app_5las/src/features/onboarding/domain/usecases/get_districts.dart';
 import 'package:app_5las/src/features/onboarding/domain/usecases/get_user_data.dart';
 import 'package:app_5las/src/features/onboarding/presentation/bloc/onboarding_bloc.dart';
@@ -31,7 +32,7 @@ Future<void> init() async {
   ///BLOCS
   serviceLocator.registerFactory(() => SignupBloc(getDistricts: serviceLocator()));
   serviceLocator.registerFactory(() => AuthBloc(loginAttempt: serviceLocator()));
-  serviceLocator.registerFactory(() => OnBoardingBloc( getUserData: serviceLocator() ,getDistricts: serviceLocator()));
+  serviceLocator.registerFactory(() => OnBoardingBloc( getUserData: serviceLocator() ,getDistricts: serviceLocator(), getCompanies: serviceLocator()));
   serviceLocator.registerFactory(() => ProfileBloc(profileUserData: serviceLocator()));
 
   ///use cases
@@ -40,6 +41,7 @@ Future<void> init() async {
   serviceLocator.registerLazySingleton(() => GetDistrict(onBoardingRepository: serviceLocator()));
   serviceLocator.registerLazySingleton(() => GetUserData(onBoardingRepository: serviceLocator()));
   serviceLocator.registerLazySingleton(() => ProfileUserData(profileRepository: serviceLocator()));
+  serviceLocator.registerLazySingleton(() => GetCompanies(onBoardingRepository: serviceLocator()));
 
   ///repositories
   serviceLocator.registerLazySingleton<SignUpRepository>(() => SignUpRepositoryImpl(remoteDataSource: serviceLocator()));

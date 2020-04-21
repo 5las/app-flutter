@@ -43,20 +43,20 @@ class LocalDataSourceImpl implements LocalDataSource {
   }
 
    cacheSessionToken(String token)async {
-    final data ={
+    /*final data ={
       'accessToken': token
     };
-   await storage.write(key: CACHED_SESSION_TOKEN, value: jsonEncode(data));
-     //return sharedPreferences.setString(CACHED_SESSION_TOKEN, token);
+   await storage.write(key: CACHED_SESSION_TOKEN, value: jsonEncode(data));*/
+     return sharedPreferences.setString(CACHED_SESSION_TOKEN, token);
   }
 
   @override
   Future<String> getSessionToken() async{
-    final result = await storage.read(key: CACHED_SESSION_TOKEN);
+    /*final result = await storage.read(key: CACHED_SESSION_TOKEN);
     if(result!=null){
       return jsonDecode(result);
     }
-    return null;
-    //return Future.value(sharedPreferences.getString(CACHED_SESSION_TOKEN));
+    return null;*/
+    return Future.value(sharedPreferences.getString(CACHED_SESSION_TOKEN));
   }
 }

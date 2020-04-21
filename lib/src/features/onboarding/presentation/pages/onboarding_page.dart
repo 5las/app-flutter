@@ -1,7 +1,9 @@
 import 'package:app_5las/src/core/widgets/default_button.dart';
+import 'package:app_5las/src/core/widgets/progress_overlay.dart';
 import 'package:app_5las/src/data/datasources/local_data_source.dart';
 import 'package:app_5las/src/features/auth/domain/entities/login_response.dart';
 import 'package:app_5las/src/features/auth/presentation/bloc/login_bloc.dart';
+import 'package:app_5las/src/features/onboarding/domain/entities/company.dart';
 import 'package:app_5las/src/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:app_5las/src/features/onboarding/presentation/widgets/nav_drawer.dart';
 import 'package:app_5las/src/config/colors.dart';
@@ -24,7 +26,7 @@ class OnBoardingPage extends StatefulWidget {
   _OnBoardingPageState createState() => _OnBoardingPageState();
 }
 
-List cardSlider = [1, 2, 3];
+
 
 class _OnBoardingPageState extends State<OnBoardingPage> {
 
@@ -41,6 +43,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
 
@@ -48,7 +51,17 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       create: (_) => _onBoardingBloc,
       child: BlocBuilder<OnBoardingBloc, OnBoardingState>(
           builder: (context, state) {
-            if(state is OnBoardingLoaded){
+            if(state is OnBoardingInitial){
+              return Scaffold(
+                backgroundColor: AppColors.white,
+                body: Center(
+                  child: CupertinoActivityIndicator(
+                    radius: 20.0,
+                  ),
+                ),
+              );
+            }
+            else if(state is OnBoardingLoaded){
               return Scaffold(
                 appBar: AppBar(
                   backgroundColor: AppColors.primaryColor,
@@ -75,7 +88,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   ),
                   elevation: 0.0,
                 ),
-                drawer: NavDrawer(),
+                drawer: NavDrawer(state.sessionData),
                 body: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: SingleChildScrollView(
@@ -152,25 +165,88 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                               fontSize: 16.0,
                               fontWeight: FontWeight.w600),
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.backgroundColorComboBox,
-                            borderRadius: BorderRadius.only(
-                              topLeft: const Radius.circular(20.0),
-                              topRight: const Radius.circular(20.0),
-                              bottomLeft: const Radius.circular(20.0),
-                              bottomRight: const Radius.circular(20.0),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 19.0),
-                            child: DropDownEstablishment(),
-                          ),
+                        BlocBuilder<OnBoardingBloc, OnBoardingState>(
+                          builder: (context, state){
+                            if(state is OnBoardingFailure){
+                              return Container(child: null,);
+                            }
+                            else if(state is OnBoardingLoading){
+                              return Column(
+                                children: <Widget>[
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: AppColors.backgroundColorComboBox,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: const Radius.circular(20.0),
+                                        topRight: const Radius.circular(20.0),
+                                        bottomLeft: const Radius.circular(20.0),
+                                        bottomRight: const Radius.circular(20.0),
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                                      child: null,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 18.0,
+                                  ),
+                                  Container(child: null),
+                                ],
+                              );
+                            }else if (state is OnBoardingLoaded){
+                              return Column(
+                                children: <Widget>[
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: AppColors.backgroundColorComboBox,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: const Radius.circular(20.0),
+                                        topRight: const Radius.circular(20.0),
+                                        bottomLeft: const Radius.circular(20.0),
+                                        bottomRight: const Radius.circular(20.0),
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                                      child: null,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 18.0,
+                                  ),
+                                  Container(child: null),
+                                ],
+                              );
+                            }else if(state is OnBoardingCompanies){
+                              return Column(
+                                children: <Widget>[
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: AppColors.backgroundColorComboBox,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: const Radius.circular(20.0),
+                                        topRight: const Radius.circular(20.0),
+                                        bottomLeft: const Radius.circular(20.0),
+                                        bottomRight: const Radius.circular(20.0),
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                                      child: DropDownEstablishment(state.companies),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 18.0,
+                                  ),
+                                  Container(child: cardsSlider(state.companies)),
+                                ],
+                              );
+                            }else{
+                              return Container(child: null,);
+                            }
+                          },
                         ),
-                        SizedBox(
-                          height: 18.0,
-                        ),
-                        Container(child: cardsSlider()),
                         SizedBox(
                           height: 18.0,
                         ),
@@ -187,10 +263,19 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   ),
                 ),
               );
+            }
+            else if (state is OnBoardingLoading){
+              return Scaffold(
+                backgroundColor: AppColors.white,
+                body: Center(
+                  child: CupertinoActivityIndicator(
+                    radius: 20.0,
+                  ),
+                ),
+              );
             }else{
               return Container(child: null,);
             }
-
           },
       ),
     );
@@ -357,7 +442,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         });
   }
 
-  Widget cardsSlider() {
+  Widget cardsSlider(List<Company> companies) {
     final basicSlider = CarouselSlider(
       autoPlay: false,
       enableInfiniteScroll: false,
@@ -367,7 +452,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       viewportFraction: 1.0,
       aspectRatio: 2.0,
       initialPage: 0,
-      items: cardSlider.map((i) {
+      items: companies.map((i) {
         return Builder(builder: (BuildContext context) {
           return Stack(
             children: <Widget>[
@@ -390,9 +475,17 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     Padding(
                       padding: const EdgeInsets.only(left: 30.0),
                       child: CircleAvatar(
-                        backgroundColor: Colors.amber,
+                        backgroundColor: Colors.transparent,
                         radius: 48.0,
                         child: Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage('${i.logo_url}'),
+                              fit: BoxFit.fitWidth,
+                              alignment: Alignment.lerp(
+                                  Alignment.bottomCenter, Alignment.center, 0.5),
+                            ),
+                          ),
                           child: null,
                         ),
                       ),
@@ -414,7 +507,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                               padding:
                                   const EdgeInsets.only(top: 4.0, bottom: 8),
                               child: Text(
-                                'Av. Grau 513',
+                                '${i.branches[0].address}',
                                 softWrap: true,
                                 overflow: TextOverflow.visible,
                                 style: TextStyle(
@@ -431,7 +524,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 4.0),
                               child: Text(
-                                '(511)613 8888',
+                                '${i.branches[0].phone}',
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w500,
@@ -465,7 +558,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     child: Center(
                       child: FittedBox(
                         fit: BoxFit.fitWidth,
-                        child: Text('Abierto',
+                        child: (i.branches[0].open == false)?
+                              Text('Cerrado',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                              fontSize: 16.0, color: AppColors.white))
+                            : Text('Abierto',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 16.0, color: AppColors.white)),

@@ -1,6 +1,7 @@
 import 'package:app_5las/src/config/colors.dart';
 import 'package:app_5las/src/data/models/signup/district_model.dart';
 import 'package:app_5las/src/features/onboarding/domain/entities/district.dart';
+import 'package:app_5las/src/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:flutter/material.dart';
 
 class DropDownDistricts extends StatefulWidget {
@@ -14,7 +15,9 @@ class DropDownDistricts extends StatefulWidget {
 }
 
 class _DropDownDistrictsState extends State<DropDownDistricts> {
+  OnBoardingBloc _onBoardingBloc;
   String selected;
+
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
@@ -30,12 +33,15 @@ class _DropDownDistrictsState extends State<DropDownDistricts> {
       ),
       items:  widget.districts.map(
               (label) => DropdownMenuItem(
-            child: Text(label.name.toString()),
-            value: label.name,
+            child: Text(label.name),
+            value: label.id,
           )
       ).toList(),
       onChanged: (value) {
-        setState(() => selected = value);
+          setState(() {
+            selected = value;
+          });
+          _onBoardingBloc.add(LoadCommercesEvent(districtId: int.parse(value)));
       },
     );
   }

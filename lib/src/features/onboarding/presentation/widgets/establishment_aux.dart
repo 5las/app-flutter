@@ -1,8 +1,11 @@
 import 'package:app_5las/src/config/colors.dart';
+import 'package:app_5las/src/data/models/company_model.dart';
+import 'package:app_5las/src/features/onboarding/domain/entities/company.dart';
 import 'package:flutter/material.dart';
 
 class DropDownEstablishment extends StatefulWidget {
-  const DropDownEstablishment({
+  final List<Company> companies;
+  const DropDownEstablishment(this.companies, {
     Key key,
   }) : super(key: key);
 
@@ -14,7 +17,7 @@ class _DropDownEstablishmentState extends State<DropDownEstablishment> {
   String selected;
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<String>(
+    return DropdownButtonFormField(
       value: selected,
       icon: Icon(
         Icons.keyboard_arrow_down,
@@ -25,10 +28,9 @@ class _DropDownEstablishmentState extends State<DropDownEstablishment> {
               borderSide: BorderSide(color: Colors.transparent)
           )
       ),
-      items: ["Supermercados Metro", "Plaza vea", "Vivanda"]
-          .map((label) => DropdownMenuItem(
-        child: Text(label),
-        value: label,
+      items: widget.companies.map((label) => DropdownMenuItem(
+        child: Text(label.name.toString()),
+        value: label.name,
       ))
           .toList(),
       onChanged: (value) {

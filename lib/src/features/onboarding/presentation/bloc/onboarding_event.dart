@@ -8,7 +8,14 @@ abstract class OnBoardingEvent extends Equatable{
 
 class UserDataEvent extends OnBoardingEvent{
   final int departmentId;
-  UserDataEvent({@required this.departmentId});
+  UserDataEvent({this.departmentId});
   @override
   List<Object> get props => [departmentId];
+}
+
+class LoadCommercesEvent extends OnBoardingEvent{
+  final int districtId;
+  LoadCommercesEvent({this.districtId});
+  @override
+  List<Object> get props => [districtId];
 }
