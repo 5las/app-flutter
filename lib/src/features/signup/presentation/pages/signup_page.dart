@@ -1,7 +1,9 @@
+import 'package:app_5las/src/commons/mixins/dialogs_mixin.dart';
 import 'package:app_5las/src/commons/mixins/progress_overlay_mixin.dart';
 import 'package:app_5las/src/config/colors.dart';
 import 'package:app_5las/src/core/widgets/default_button.dart';
 import 'package:app_5las/src/core/widgets/default_input_decoration.dart';
+import 'package:app_5las/src/core/widgets/dialogs/success_dialog.dart';
 import 'package:app_5las/src/core/widgets/progress_overlay.dart';
 import 'package:app_5las/src/features/signup/domain/usecases/signup.dart';
 import 'package:app_5las/src/features/signup/presentation/bloc/signup_bloc.dart';
@@ -17,7 +19,8 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> with ProgressOverlayMixin {
+class _SignUpPageState extends State<SignUpPage>
+    with ProgressOverlayMixin, DialogsMixin {
   SignupBloc _signUpBloc;
 
   String _selectedDistrict;
@@ -50,6 +53,21 @@ class _SignUpPageState extends State<SignUpPage> with ProgressOverlayMixin {
   void hideProgress() {
     super.hideProgress();
     _progressOverlay.hide();
+  }
+
+  @override
+  void showInfoDialog() {
+    super.showInfoDialog();
+  }
+
+  @override
+  void showSuccessDialog() {
+    super.showSuccessDialog();
+    showDialog(
+        context: context,
+        builder: (context) => SuccessDialog(
+              message: 'Registro exitoso',
+            ));
   }
 
   @override

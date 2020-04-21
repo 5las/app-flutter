@@ -26,32 +26,26 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   RemoteDataSourceImpl({@required this.client});
 
   @override
-  Future<LoginResponseModel> login(LoginParams loginParams) async{
-    try{
+  Future<LoginResponseModel> login(LoginParams loginParams) async {
+    try {
       final Map<String, String> data = {
         'email': loginParams.email,
         'password': loginParams.password
       };
 
-      final response =
-          await client.post(
-              '$API_URL/auth/signin',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: json.encode(data)
-          );
+      final response = await client.post('$API_URL/auth/signin',
+          headers: {'Content-Type': 'application/json'},
+          body: json.encode(data));
 
       if (response.statusCode == 201) {
         return LoginResponseModel.fromJson(json.decode(response.body));
       } else {
         throw ServerException();
       }
-    } on PlatformException catch(e){
+    } on PlatformException catch (e) {
       return null;
     }
   }
-
 
   @override
   Future<SignUpResponseModel> signUp(SignUpParams params) async {
@@ -65,12 +59,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'district_id': params.districtId
     };
 
-    final response =
-        await client.post('$API_URL/auth/signup',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: json.encode(data));
+    final response = await client.post('$API_URL/auth/signup',
+        headers: {'Content-Type': 'application/json'}, body: json.encode(data));
     //201: Created
     if (response.statusCode == 201) {
       return SignUpResponseModel();
@@ -95,6 +85,4 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       throw ServerException();
     }
   }
-
-
 }
