@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 
 class DropDownDistricts extends StatefulWidget {
   final List<DistrictModel> districts;
-  const DropDownDistricts(this.districts,   {
+  final OnBoardingBloc onBoardingBloc;
+  const DropDownDistricts(this.districts, this.onBoardingBloc,{
     Key key,
   }) : super(key: key);
 
@@ -15,7 +16,6 @@ class DropDownDistricts extends StatefulWidget {
 }
 
 class _DropDownDistrictsState extends State<DropDownDistricts> {
-  OnBoardingBloc _onBoardingBloc;
   String selected;
 
   @override
@@ -41,7 +41,7 @@ class _DropDownDistrictsState extends State<DropDownDistricts> {
           setState(() {
             selected = value;
           });
-          _onBoardingBloc.add(LoadCommercesEvent(districtId: int.parse(value)));
+          widget.onBoardingBloc.add(LoadCommercesEvent(districtId: int.parse(value)));
       },
     );
   }
