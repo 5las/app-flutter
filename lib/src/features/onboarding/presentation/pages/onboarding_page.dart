@@ -76,7 +76,30 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     ),
                   ],
                 );
-              }else if(state is OnBoardingLoaded){
+              }else if(state is OnBoardingCompanies){
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      '${state.sessionData.fullname}',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      '${state.sessionData.district.name} - Barranco',
+                      style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 19.0,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                );
+              }
+              else if(state is OnBoardingLoaded){
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,7 +133,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           builder: (context,state){
             if(state is OnBoardingInitial){
                 return Container(child: null,);
-              }else if(state is OnBoardingLoaded){
+              }else if(state is OnBoardingCompanies){
+              return NavDrawer(state.sessionData);
+            }
+            else if(state is OnBoardingLoaded){
                      return NavDrawer(state.sessionData);
               }else{
               return Container(child: null,);
@@ -185,7 +211,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                           child: null,
                         ),
                       );
-                    }else if(state is OnBoardingLoaded){
+                    }else if(state is OnBoardingCompanies){
                       return Container(
                         decoration: BoxDecoration(
                           color: AppColors.backgroundColorComboBox,
@@ -201,7 +227,25 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                           child: DropDownDistricts(state.districts, _onBoardingBloc),
                         ),
                       );
-                    }else{
+                    }
+                    else if(state is OnBoardingLoaded){
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.backgroundColorComboBox,
+                          borderRadius: BorderRadius.only(
+                            topLeft: const Radius.circular(20.0),
+                            topRight: const Radius.circular(20.0),
+                            bottomLeft: const Radius.circular(20.0),
+                            bottomRight: const Radius.circular(20.0),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                          child: DropDownDistricts(state.districts, _onBoardingBloc),
+                        ),
+                      );
+                    }
+                    else{
                       return Container(child: null,);
                     }
                   }
@@ -222,30 +266,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       return Container(child: null,);
                     }
                     else if(state is OnBoardingLoading){
-                      return Column(
-                        children: <Widget>[
-                          Container(
-                            decoration: BoxDecoration(
-                              color: AppColors.backgroundColorComboBox,
-                              borderRadius: BorderRadius.only(
-                                topLeft: const Radius.circular(20.0),
-                                topRight: const Radius.circular(20.0),
-                                bottomLeft: const Radius.circular(20.0),
-                                bottomRight: const Radius.circular(20.0),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 19.0),
-                              child: null,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 18.0,
-                          ),
-                          Container(child: null),
-                        ],
-                      );
-                    }else if (state is OnBoardingLoaded){
                       return Column(
                         children: <Widget>[
                           Container(
@@ -293,8 +313,55 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                           Container(child: cardsSlider(state.companies)),
                         ],
                       );
+                    }
+                    else if (state is OnBoardingLoaded){
+                      return Column(
+                        children: <Widget>[
+                          Container(
+                            decoration: BoxDecoration(
+                              color: AppColors.backgroundColorComboBox,
+                              borderRadius: BorderRadius.only(
+                                topLeft: const Radius.circular(20.0),
+                                topRight: const Radius.circular(20.0),
+                                bottomLeft: const Radius.circular(20.0),
+                                bottomRight: const Radius.circular(20.0),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                              child: null,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 18.0,
+                          ),
+                          Container(child: null),
+                        ],
+                      );
                     }else{
-                      return Container(child: null,);
+                      return Column(
+                        children: <Widget>[
+                          Container(
+                            decoration: BoxDecoration(
+                              color: AppColors.backgroundColorComboBox,
+                              borderRadius: BorderRadius.only(
+                                topLeft: const Radius.circular(20.0),
+                                topRight: const Radius.circular(20.0),
+                                bottomLeft: const Radius.circular(20.0),
+                                bottomRight: const Radius.circular(20.0),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                              child: null,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 18.0,
+                          ),
+                          Container(child: null),
+                        ],
+                      );
                     }
                   },
                 ),

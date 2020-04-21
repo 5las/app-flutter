@@ -41,7 +41,7 @@ class _DropDownDistrictsState extends State<DropDownDistricts> {
           setState(() {
             selected = value;
           });
-          widget.onBoardingBloc.add(LoadCommercesEvent(districtId: int.parse(value)));
+          widget.onBoardingBloc.add(LoadCommercesEvent(districtId: int.parse(value),departmentId: 1501));
       },
     );
   }
