@@ -14,8 +14,9 @@ class UserDataEvent extends OnBoardingEvent{
 }
 
 class LoadCommercesEvent extends OnBoardingEvent{
+  final int departmentId;
   final int districtId;
-  LoadCommercesEvent({this.districtId});
+  LoadCommercesEvent({this.departmentId,this.districtId});
   @override
-  List<Object> get props => [districtId];
+  List<Object> get props => [departmentId ,districtId];
 }

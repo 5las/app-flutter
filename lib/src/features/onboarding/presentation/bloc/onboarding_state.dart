@@ -23,11 +23,13 @@ class OnBoardingLoaded extends OnBoardingState{
 }
 
 class OnBoardingCompanies extends OnBoardingState{
+  final LoginResponse sessionData;
+  final List<DistrictModel> districts;
   final List<Company> companies;
-  OnBoardingCompanies({this.companies});
+  OnBoardingCompanies({ this.sessionData,this.districts,this.companies});
   @override
   // TODO: implement props
-  List<Object> get props => [companies];
+  List<Object> get props => [districts,companies,sessionData];
 
 }
 

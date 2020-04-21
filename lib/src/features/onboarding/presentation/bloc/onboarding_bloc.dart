@@ -82,15 +82,29 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent,OnBoardingState>{
     }
     else if(event is LoadCommercesEvent){
       try{
+        final failureOrDistricts = await getDistricts.call(DistrictsParams(departmentId: event.departmentId));
         final failureOrCompanies = await getCompanies.call(CompaniesParams(districtId: event.districtId));
+        final failureOrUSerData = await getUserData.call(NoParams());
+
         final companies = failureOrCompanies.fold(
                 (failure){
               return OnBoardingFailure(error: _mapFailureToMessage(failure));
             },(companies){
           return companies;
-
         });
-        yield OnBoardingCompanies(companies: companies);
+        final distritcs     = failureOrDistricts.fold((failure){
+          return OnBoardingFailure(error: _mapFailureToMessage(failure));
+        },(district){
+          return district;
+        }
+        );
+        final sessionData   = failureOrUSerData.fold((failure){
+          return OnBoardingFailure(error: _mapFailureToMessage(failure));
+        },(sessionData){
+          return sessionData;
+        }
+        );
+        yield OnBoardingCompanies(companies: companies,districts: distritcs,sessionData: sessionData);
       } catch(e){
         yield OnBoardingFailure(error: _mapFailureToMessage(e));
       }
