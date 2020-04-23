@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> with ProgressOverlayMixin {
   AuthBloc _authBloc;
   bool _obscureText = true;
 
-  var _loginKey = GlobalKey<FormState>();
+  static GlobalKey<FormState> _loginKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 

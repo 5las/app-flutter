@@ -13,3 +13,12 @@ class GetDistrictsEvent extends SignupEvent {
   @override
   List<Object> get props => [departmentId];
 }
+
+class SignUpAttemptEvent extends SignupEvent {
+  final SignUpParams signUpParams;
+
+  SignUpAttemptEvent({@required this.signUpParams});
+
+  @override
+  List<Object> get props => [signUpParams];
+}

@@ -395,7 +395,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   }
   
   showInfoDialog(BuildContext context){
-    
+    showDialog(context: context, child: );
   }
 
   Future<void> buildDialogSelectSchedule(BuildContext context) {
