@@ -3,17 +3,18 @@ import 'package:app_5las/src/core/error/exceptions.dart';
 import 'package:app_5las/src/data/models/auth/login_response_model.dart';
 import 'package:app_5las/src/data/models/company_model.dart';
 import 'package:app_5las/src/data/models/generateticket/ticket_reponse_model.dart';
+import 'package:app_5las/src/data/models/onboarding/schedule_response_model.dart';
 import 'package:app_5las/src/data/models/signup/district_model.dart';
 import 'package:app_5las/src/data/models/signup/signup_response_model.dart';
 import 'package:app_5las/src/features/auth/domain/usecases/login_attempt.dart';
 import 'package:app_5las/src/features/onboarding/domain/usecases/generate_ticket.dart';
 import 'package:app_5las/src/features/onboarding/domain/usecases/get_companies.dart';
+import 'package:app_5las/src/features/onboarding/domain/usecases/get_schedule.dart';
 import 'package:app_5las/src/features/signup/domain/usecases/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-
 
 const API_URL = 'https://5las.renatocenteno.com';
 
@@ -24,9 +25,14 @@ abstract class RemoteDataSource {
 
   Future<List<DistrictModel>> getDistricts(int districtId);
 
-  Future<List<CompanyModel>> getCompaniesByDistrict(String token, CompaniesParams companiesParams);
+  Future<List<CompanyModel>> getCompaniesByDistrict(
+      String token, CompaniesParams companiesParams);
 
-  Future<TicketResponseModel> postGenerateTicket(String token, TicketsParams ticketsParams);
+  Future<TicketResponseModel> postGenerateTicket(
+      String token, TicketsParams ticketsParams);
+
+  Future<ScheduleResponseModel> getScheduleByBranch(
+      String token, GetScheduleParams params);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -35,32 +41,26 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   RemoteDataSourceImpl({@required this.client});
 
   @override
-  Future<LoginResponseModel> login(LoginParams loginParams) async{
-    try{
+  Future<LoginResponseModel> login(LoginParams loginParams) async {
+    try {
       final Map<String, String> data = {
         'email': loginParams.email,
         'password': loginParams.password
       };
 
-      final response =
-          await client.post(
-              '$API_URL/auth/signin',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: json.encode(data)
-          );
+      final response = await client.post('$API_URL/auth/signin',
+          headers: {'Content-Type': 'application/json'},
+          body: json.encode(data));
 
       if (response.statusCode == 201) {
         return LoginResponseModel.fromJson(json.decode(response.body));
       } else {
         throw ServerException();
       }
-    } on PlatformException catch(e){
+    } on PlatformException catch (e) {
       return null;
     }
   }
-
 
   @override
   Future<SignUpResponseModel> signUp(SignUpParams params) async {
@@ -74,12 +74,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'district_id': params.districtId
     };
 
-    final response =
-        await client.post('$API_URL/auth/signup',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: json.encode(data));
+    final response = await client.post('$API_URL/auth/signup',
+        headers: {'Content-Type': 'application/json'}, body: json.encode(data));
     //201: Created
     if (response.statusCode == 201) {
       return SignUpResponseModel();
@@ -92,13 +88,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<List<DistrictModel>> getDistricts(int departmentId) async {
-    final response =
-        await client.get(
-            '$API_URL/companies/districts/$departmentId',
-            headers: {
-              'Content-Type' : 'application/json'
-            }
-        );
+    final response = await client.get(
+        '$API_URL/companies/districts/$departmentId',
+        headers: {'Content-Type': 'application/json'});
 
     if (response.statusCode == 200) {
       //convirtiendo el JSONarray a un List<DistrictModel>
@@ -110,14 +102,14 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     }
   }
 
-  Future<List<CompanyModel>> getCompaniesByDistrict(String token, CompaniesParams companiesParams)async{
+  Future<List<CompanyModel>> getCompaniesByDistrict(
+      String token, CompaniesParams companiesParams) async {
     final response = await client.get(
         '$API_URL/companies/byDistrict/${companiesParams.districtId}',
-      headers: {
-        'Authorization': 'bearer $token',
-        'Content-Type' : 'application/json'
-      }
-    );
+        headers: {
+          'Authorization': 'bearer $token',
+          'Content-Type': 'application/json'
+        });
     if (response.statusCode == 200) {
       return (json.decode(response.body) as List)
           .map((e) => CompanyModel.fromJson(e))
@@ -126,33 +118,48 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       throw ServerException();
     }
   }
-  
-  Future<TicketResponseModel> postGenerateTicket(String token, TicketsParams ticketsParams )async{
-    try{
+
+  Future<TicketResponseModel> postGenerateTicket(
+      String token, TicketsParams ticketsParams) async {
+    try {
       final Map<String, int> data = {
         'turnId': ticketsParams.turnId,
       };
 
-      final response =
-      await client.post(
-          '$API_URL/tickets/generate',
+      final response = await client.post('$API_URL/tickets/generate',
           headers: {
             'authorization': 'bearer $token',
-            'Content-Type' : 'application/json'
+            'Content-Type': 'application/json'
           },
-          body: json.encode(data)
-      );
+          body: json.encode(data));
 
       if (response.statusCode == 201) {
         return TicketResponseModel.fromJson(json.decode(response.body));
       } else {
         throw ServerException();
       }
-    } on PlatformException catch(e){
+    } on PlatformException catch (e) {
       return null;
     }
-
   }
 
+  Future<ScheduleResponseModel> getScheduleByBranch(
+      String token, GetScheduleParams params) async {
+    try {
+      final response = await client.get(
+          '$API_URL/companies/branch/${params.branchId}/schedule',
+          headers: {
+            'Authorization': 'bearer $token',
+            'Content-Type': 'application/json'
+          });
 
+      if (response.statusCode == 200) {
+        return ScheduleResponseModel.fromJson(json.decode(response.body));
+      } else {
+        throw ServerException();
+      }
+    } on Exception {
+      throw ServerException();
+    }
+  }
 }

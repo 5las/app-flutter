@@ -1,16 +1,13 @@
 import 'package:app_5las/src/core/widgets/default_button.dart';
-import 'package:app_5las/src/core/widgets/progress_overlay.dart';
-import 'package:app_5las/src/data/datasources/local_data_source.dart';
-import 'package:app_5las/src/features/auth/domain/entities/login_response.dart';
-import 'package:app_5las/src/features/auth/presentation/bloc/login_bloc.dart';
+import 'package:app_5las/src/data/models/signup/district_model.dart';
 import 'package:app_5las/src/features/onboarding/domain/entities/company.dart';
+import 'package:app_5las/src/features/onboarding/domain/repositories/onboarding_repository.dart';
+import 'package:app_5las/src/features/onboarding/domain/usecases/get_schedule.dart';
 import 'package:app_5las/src/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:app_5las/src/features/onboarding/presentation/widgets/nav_drawer.dart';
 import 'package:app_5las/src/config/colors.dart';
 import 'package:app_5las/src/config/routes.dart';
 import 'package:app_5las/src/features/onboarding/presentation/widgets/departments_aux.dart';
-import 'package:app_5las/src/features/onboarding/presentation/widgets/districts_aux.dart';
-import 'package:app_5las/src/features/onboarding/presentation/widgets/establishment_aux.dart';
 import 'package:app_5las/src/injection_container.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,18 +16,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardingPage extends StatefulWidget {
   @override
   _OnBoardingPageState createState() => _OnBoardingPageState();
 }
 
-
-
 class _OnBoardingPageState extends State<OnBoardingPage> {
-
   OnBoardingBloc _onBoardingBloc;
+
+  Company _selectedCompany;
+  String _selectedBranch;
+  String _selectedSchedule;
+  String _selectedDistrict;
 
   @override
   void initState() {
@@ -43,18 +41,16 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider(
       create: (_) => _onBoardingBloc,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.primaryColor,
           title: BlocBuilder<OnBoardingBloc, OnBoardingState>(
-            builder:(context,state){
-              if(state is OnBoardingInitial){
+            builder: (context, state) {
+              if (state is OnBoardingInitial) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +72,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     ),
                   ],
                 );
-              }else if(state is OnBoardingCompanies){
+              } else if (state is OnBoardingCompanies) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,8 +94,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     ),
                   ],
                 );
-              }
-              else if(state is OnBoardingLoaded){
+              } else if (state is OnBoardingLoaded) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,27 +116,31 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     ),
                   ],
                 );
-              }else{
-                return Container(child: null,);
+              } else {
+                return Container(
+                  child: null,
+                );
               }
             },
-
           ),
           elevation: 0.0,
         ),
         drawer: BlocBuilder<OnBoardingBloc, OnBoardingState>(
-          builder: (context,state){
-            if(state is OnBoardingInitial){
-                return Container(child: null,);
-              }else if(state is OnBoardingCompanies){
-              return NavDrawer(state.sessionData);
-            }
-            else if(state is OnBoardingLoaded){
-                     return NavDrawer(state.sessionData);
-              }else{
-              return Container(child: null,);
-            }
-          }),
+            builder: (context, state) {
+          if (state is OnBoardingInitial) {
+            return Container(
+              child: null,
+            );
+          } else if (state is OnBoardingCompanies) {
+            return NavDrawer(state.sessionData);
+          } else if (state is OnBoardingLoaded) {
+            return NavDrawer(state.sessionData);
+          } else {
+            return Container(
+              child: null,
+            );
+          }
+        }),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: SingleChildScrollView(
@@ -193,63 +192,62 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       fontSize: 16.0,
                       fontWeight: FontWeight.w600),
                 ),
-                BlocBuilder<OnBoardingBloc,OnBoardingState>(
-                  builder:(context,state){
-                    if(state is OnBoardingInitial){
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.backgroundColorComboBox,
-                          borderRadius: BorderRadius.only(
-                            topLeft: const Radius.circular(20.0),
-                            topRight: const Radius.circular(20.0),
-                            bottomLeft: const Radius.circular(20.0),
-                            bottomRight: const Radius.circular(20.0),
-                          ),
+                BlocBuilder<OnBoardingBloc, OnBoardingState>(
+                    builder: (context, state) {
+                  if (state is OnBoardingInitial) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.backgroundColorComboBox,
+                        borderRadius: BorderRadius.only(
+                          topLeft: const Radius.circular(20.0),
+                          topRight: const Radius.circular(20.0),
+                          bottomLeft: const Radius.circular(20.0),
+                          bottomRight: const Radius.circular(20.0),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 19.0),
-                          child: null,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                        child: null,
+                      ),
+                    );
+                  } else if (state is OnBoardingCompanies) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.backgroundColorComboBox,
+                        borderRadius: BorderRadius.only(
+                          topLeft: const Radius.circular(20.0),
+                          topRight: const Radius.circular(20.0),
+                          bottomLeft: const Radius.circular(20.0),
+                          bottomRight: const Radius.circular(20.0),
                         ),
-                      );
-                    }else if(state is OnBoardingCompanies){
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.backgroundColorComboBox,
-                          borderRadius: BorderRadius.only(
-                            topLeft: const Radius.circular(20.0),
-                            topRight: const Radius.circular(20.0),
-                            bottomLeft: const Radius.circular(20.0),
-                            bottomRight: const Radius.circular(20.0),
-                          ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                        child: printDropDownDistricts(state.districts),
+                      ),
+                    );
+                  } else if (state is OnBoardingLoaded) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.backgroundColorComboBox,
+                        borderRadius: BorderRadius.only(
+                          topLeft: const Radius.circular(20.0),
+                          topRight: const Radius.circular(20.0),
+                          bottomLeft: const Radius.circular(20.0),
+                          bottomRight: const Radius.circular(20.0),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 19.0),
-                          child: DropDownDistricts(state.districts, _onBoardingBloc),
-                        ),
-                      );
-                    }
-                    else if(state is OnBoardingLoaded){
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.backgroundColorComboBox,
-                          borderRadius: BorderRadius.only(
-                            topLeft: const Radius.circular(20.0),
-                            topRight: const Radius.circular(20.0),
-                            bottomLeft: const Radius.circular(20.0),
-                            bottomRight: const Radius.circular(20.0),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 19.0),
-                          child: DropDownDistricts(state.districts, _onBoardingBloc),
-                        ),
-                      );
-                    }
-                    else{
-                      return Container(child: null,);
-                    }
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                        child: printDropDownDistricts(state.districts),
+                      ),
+                    );
+                  } else {
+                    return Container(
+                      child: null,
+                    );
                   }
-                ),
+                }),
                 SizedBox(
                   height: 16.0,
                 ),
@@ -261,11 +259,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       fontWeight: FontWeight.w600),
                 ),
                 BlocBuilder<OnBoardingBloc, OnBoardingState>(
-                  builder: (context, state){
-                    if(state is OnBoardingFailure){
-                      return Container(child: null,);
-                    }
-                    else if(state is OnBoardingLoading){
+                  builder: (context, state) {
+                    if (state is OnBoardingFailure) {
+                      return Container(
+                        child: null,
+                      );
+                    } else if (state is OnBoardingLoading) {
                       return Column(
                         children: <Widget>[
                           Container(
@@ -279,7 +278,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                               ),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 19.0),
                               child: null,
                             ),
                           ),
@@ -289,7 +289,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                           Container(child: null),
                         ],
                       );
-                    }else if(state is OnBoardingCompanies){
+                    } else if (state is OnBoardingCompanies) {
                       return Column(
                         children: <Widget>[
                           Container(
@@ -303,18 +303,19 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                               ),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 19.0),
-                              child: DropDownEstablishment(state.companies),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 19.0),
+                              child:
+                                  printDropDownEstablishment(state.companies),
                             ),
                           ),
                           SizedBox(
                             height: 18.0,
                           ),
-                          Container(child: cardsSlider(state.companies)),
+                          Container(child: cardsSlider(_selectedCompany)),
                         ],
                       );
-                    }
-                    else if (state is OnBoardingLoaded){
+                    } else if (state is OnBoardingLoaded) {
                       return Column(
                         children: <Widget>[
                           Container(
@@ -328,7 +329,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                               ),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 19.0),
                               child: null,
                             ),
                           ),
@@ -338,7 +340,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                           Container(child: null),
                         ],
                       );
-                    }else{
+                    } else {
                       return Column(
                         children: <Widget>[
                           Container(
@@ -352,7 +354,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                               ),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 19.0),
                               child: null,
                             ),
                           ),
@@ -372,8 +375,15 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   backgroundColor: AppColors.primaryColor,
                   textColor: AppColors.white,
                   text: 'ELEGIR HORARIO',
-                  onPressed: () {
-                    buildDialogSelectSchedule(context);
+                  onPressed: () async {
+                    var repo = serviceLocator<OnBoardingRepository>();
+                    var result = await repo.getScheduleForBranch(GetScheduleParams(
+                        branchId: int.parse(_selectedBranch)));
+
+                    result.fold(
+                      (fail) => print('NO HAY HORARIOS'), 
+                      (schedule) =>buildDialogSelectSchedule(context));
+                    
                   },
                 ),
               ],
@@ -382,6 +392,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         ),
       ),
     );
+  }
+  
+  showInfoDialog(BuildContext context){
+    
   }
 
   Future<void> buildDialogSelectSchedule(BuildContext context) {
@@ -516,7 +530,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                                 text: 'SI',
                                 textColor: AppColors.white,
                                 onPressed: () {
-                                  Navigator.of(context).pushNamed(Router.qrRoute);
+                                  Navigator.of(context)
+                                      .pushNamed(Router.qrRoute);
                                 },
                               ),
                             ),
@@ -545,7 +560,18 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         });
   }
 
-  Widget cardsSlider(List<Company> companies) {
+  Widget cardsSlider(Company company) {
+    if (company == null) {
+      return Container();
+    }
+    if (company.branches.length < 1) {
+      return Container();
+    } else {
+      _selectedBranch = company.branches[0].id.toString();
+    }
+
+    print('hay ${company.branches.length} branches');
+
     final basicSlider = CarouselSlider(
       autoPlay: false,
       enableInfiniteScroll: false,
@@ -555,7 +581,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       viewportFraction: 1.0,
       aspectRatio: 2.0,
       initialPage: 0,
-      items: companies.map((i) {
+      onPageChanged: (i) {
+        _selectedBranch = company.branches[i].id.toString();
+        print(_selectedBranch);
+      },
+      items: company.branches.map((i) {
         return Builder(builder: (BuildContext context) {
           return Stack(
             children: <Widget>[
@@ -583,10 +613,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                         child: Container(
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: NetworkImage('${i.logo_url}'),
+                              image: NetworkImage('${company.logo_url}'),
                               fit: BoxFit.fitWidth,
                               alignment: Alignment.lerp(
-                                  Alignment.bottomCenter, Alignment.center, 0.5),
+                                  Alignment.center, Alignment.center, 0.5),
                             ),
                           ),
                           child: null,
@@ -607,32 +637,18 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                               maxWidth: MediaQuery.of(context).size.width * 0.5,
                             ),
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 4.0, bottom: 8),
-                              child: Text(
-                                '${i.branches[0].address}',
+                              padding: const EdgeInsets.only(
+                                  top: 4.0, bottom: 8, right: 20),
+                              child: FittedBox(
+                                  child: Text(
+                                i.address,
                                 softWrap: true,
                                 overflow: TextOverflow.visible,
                                 style: TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w500,
                                 ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            constraints: new BoxConstraints(
-                                maxWidth:
-                                    MediaQuery.of(context).size.width * 0.5),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 4.0),
-                              child: Text(
-                                '${i.branches[0].phone}',
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w500,
-                                    height: 0.3),
-                              ),
+                              )),
                             ),
                           ),
                         ],
@@ -661,20 +677,20 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     child: Center(
                       child: FittedBox(
                         fit: BoxFit.fitWidth,
-                        child: (i.branches[0].open == false)?
-                              Text('Cerrado',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                              fontSize: 16.0, color: AppColors.white))
+                        child: (i.open == false)
+                            ? Text('Cerrado',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 16.0, color: AppColors.white))
                             : Text('Abierto',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 16.0, color: AppColors.white)),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 16.0, color: AppColors.white)),
                       ),
                     ),
                   ),
                 ),
-              ),
+              ), /*
               Positioned(
                 right: 20.0,
                 bottom: 10.0,
@@ -688,7 +704,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     ),
                   ),
                 ),
-              ),
+              ),*/
             ],
           );
         });
@@ -712,7 +728,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               color: Colors.transparent,
               child: Icon(
                 Icons.keyboard_arrow_left,
-                size: 70.0,
+                size: 45.0,
                 color: AppColors.primaryColor,
               ),
             ),
@@ -736,7 +752,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               color: Colors.transparent,
               child: Icon(
                 Icons.keyboard_arrow_right,
-                size: 70.0,
+                size: 45.0,
                 color: AppColors.primaryColor,
               ),
             ),
@@ -746,4 +762,56 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     ]);
   }
 
+  Widget printDropDownEstablishment(List<Company> companies) {
+    return DropdownButtonFormField(
+      value: _selectedCompany,
+      icon: Icon(
+        Icons.keyboard_arrow_down,
+        color: AppColors.primaryColor,
+      ),
+      decoration: InputDecoration(
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.transparent))),
+      items: companies
+          .map((company) => DropdownMenuItem(
+                child: Text(company.name.toString()),
+                value: company,
+              ))
+          .toList(),
+      onChanged: (value) {
+        setState(() => _selectedCompany = value);
+      },
+    );
+  }
+
+  Widget printDropDownDistricts(List<DistrictModel> districts) {
+    if (districts == null) {
+      return Container();
+    }
+    return DropdownButtonFormField(
+      value: _selectedDistrict,
+      icon: Icon(
+        Icons.keyboard_arrow_down,
+        color: AppColors.primaryColor,
+      ),
+      decoration: InputDecoration(
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.transparent))),
+      items: districts
+          .map((label) => DropdownMenuItem(
+                child: Text(label.name),
+                value: label.id,
+              ))
+          .toList(),
+      onChanged: (value) {
+        _selectedCompany = null;
+        _selectedBranch = null;
+        setState(() {
+          _selectedDistrict = value;
+        });
+        _onBoardingBloc.add(LoadCommercesEvent(
+            districtId: int.parse(value), departmentId: 1501));
+      },
+    );
+  }
 }

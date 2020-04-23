@@ -14,7 +14,7 @@ class DropDownDepartments extends StatefulWidget {
 }
 
 class _DropDownDepartmentsState extends State<DropDownDepartments> {
-  String selected;
+  String selected = 'Lima';
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(

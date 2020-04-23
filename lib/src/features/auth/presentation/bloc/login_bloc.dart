@@ -11,11 +11,9 @@ part 'login_state.dart';
 
 const String SERVER_FAILURE_MESSAGE = 'Server Failure';
 const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
-const String INVALID_INPUT_FAILURE_MESSAGE =
-    'Invalid Input';
+const String INVALID_INPUT_FAILURE_MESSAGE = 'Invalid Input';
 
-class  AuthBloc extends Bloc<AuthEvent, AuthState>{
-
+class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginAttempt loginAttempt;
 
   AuthBloc({@required this.loginAttempt});
@@ -25,7 +23,6 @@ class  AuthBloc extends Bloc<AuthEvent, AuthState>{
 
   @override
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
-
     String _mapFailureToMessage(Failure failure) {
       switch (failure.runtimeType) {
         case ServerFailure:
@@ -37,23 +34,18 @@ class  AuthBloc extends Bloc<AuthEvent, AuthState>{
       }
     }
 
-   if(event is  LogInEvent){
-        yield LoginLoading();
+    if (event is LogInEvent) {
+      yield LoginLoading();
 
-        final failureOrLogin = await loginAttempt.call(LoginParams(email: event.email,password: event.password));
+      final failureOrLogin = await loginAttempt
+          .call(LoginParams(email: event.email, password: event.password));
 
-        yield failureOrLogin.fold(
-             (failure) => LoginFailure(error: _mapFailureToMessage(failure)),
-             (loginResponse) => LoginLoaded(loginResponse: loginResponse),
-       );
+      yield failureOrLogin.fold(
+        (failure) => LoginFailure(error: _mapFailureToMessage(failure)),
+        (loginResponse) => LoginLoaded(loginResponse: loginResponse),
+      );
+    }
 
-
-   }
-
-   if(event is LoggedOut){
-
-   }
-
+    if (event is LoggedOut) {}
   }
-
 }

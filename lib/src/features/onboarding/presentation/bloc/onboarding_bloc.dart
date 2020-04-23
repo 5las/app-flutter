@@ -2,16 +2,14 @@ import 'dart:async';
 
 import 'package:app_5las/src/core/usecases/usecase.dart';
 import 'package:app_5las/src/data/datasources/local_data_source.dart';
-import 'package:app_5las/src/data/models/company_model.dart';
 import 'package:app_5las/src/data/models/signup/district_model.dart';
 import 'package:app_5las/src/features/auth/domain/entities/login_response.dart';
 import 'package:app_5las/src/features/onboarding/domain/entities/company.dart';
 import 'package:app_5las/src/features/onboarding/domain/usecases/get_companies.dart';
 import 'package:app_5las/src/features/onboarding/domain/usecases/get_districts.dart';
-import 'package:app_5las/src/features/onboarding/domain/entities/district.dart';
 import 'package:app_5las/src/core/error/failures.dart';
+import 'package:app_5las/src/features/onboarding/domain/usecases/get_schedule.dart';
 import 'package:app_5las/src/features/onboarding/domain/usecases/get_user_data.dart';
-import 'package:app_5las/src/features/onboarding/domain/entities/district.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
