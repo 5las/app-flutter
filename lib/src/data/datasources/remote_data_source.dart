@@ -153,8 +153,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
             'Content-Type': 'application/json'
           });
 
-      if (response.statusCode == 200) {
-        return ScheduleResponseModel.fromJson(json.decode(response.body));
+      //if (response.statusCode == 200) {
+      if(true){
+        return ScheduleResponseModel.fromJson(json.decode(fake));
       } else {
         throw ServerException();
       }
@@ -162,4 +163,52 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       throw ServerException();
     }
   }
+
+  final fake = '''{
+    "id": 1,
+    "startsAt": "10:00",
+    "endsAt": "16:00",
+    "active": true,
+    "capacity": 200,
+    "createdAt": "2020-04-22",
+    "branchId": 1,
+    "turns": [
+        {
+            "id": 1,
+            "duration": 60,
+            "startsAt": "10:00",
+            "endsAt": "11:00",
+            "capacity": 200,
+            "total": 0,
+            "scheduleId": 1
+        },
+        {
+            "id": 2,
+            "duration": 60,
+            "startsAt": "11:00",
+            "endsAt": "12:00",
+            "capacity": 200,
+            "total": 0,
+            "scheduleId": 1
+        },
+        {
+            "id": 3,
+            "duration": 60,
+            "startsAt": "13:00",
+            "endsAt": "14:00",
+            "capacity": 200,
+            "total": 0,
+            "scheduleId": 1
+        },
+        {
+            "id": 4,
+            "duration": 60,
+            "startsAt": "15:00",
+            "endsAt": "16:00",
+            "capacity": 200,
+            "total": 0,
+            "scheduleId": 1
+        }
+    ]
+}''';
 }

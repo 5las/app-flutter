@@ -1,4 +1,6 @@
 import 'package:app_5las/src/core/widgets/default_button.dart';
+import 'package:app_5las/src/core/widgets/dialogs/info_dialog.dart';
+import 'package:app_5las/src/data/models/onboarding/schedule_response_model.dart';
 import 'package:app_5las/src/data/models/signup/district_model.dart';
 import 'package:app_5las/src/features/onboarding/domain/entities/company.dart';
 import 'package:app_5las/src/features/onboarding/domain/repositories/onboarding_repository.dart';
@@ -377,13 +379,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   text: 'ELEGIR HORARIO',
                   onPressed: () async {
                     var repo = serviceLocator<OnBoardingRepository>();
-                    var result = await repo.getScheduleForBranch(GetScheduleParams(
-                        branchId: int.parse(_selectedBranch)));
+                    var result = await repo.getScheduleForBranch(
+                        GetScheduleParams(
+                            branchId: int.parse(_selectedBranch)));
 
-                    result.fold(
-                      (fail) => print('NO HAY HORARIOS'), 
-                      (schedule) =>buildDialogSelectSchedule(context));
-                    
+                    result.fold((fail) => showInfoDialog(context, 'No hay horarios registrados'),
+                        (schedule) => buildDialogSelectSchedule(context, schedule));
                   },
                 ),
               ],
@@ -393,25 +394,22 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       ),
     );
   }
-  
-  showInfoDialog(BuildContext context){
-    showDialog(context: context, child: );
+
+  showInfoDialog(BuildContext context, String message) {
+    showDialog(
+        context: context,
+        child: InfoDialog(
+          message: message,
+        ));
   }
 
-  Future<void> buildDialogSelectSchedule(BuildContext context) {
+  Future<void> buildDialogSelectSchedule(BuildContext context, ScheduleResponseModel schedule) {
     showDialog(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
           int selectedRadio = 0;
-          var listSchedule = [
-            '10:00 - 11:00',
-            '11:00 - 12:00',
-            '12:00 - 13:00',
-            '13:00 - 14:00',
-            '14:00 - 15:00',
-            '15:00 - 16:00'
-          ];
+
           return AlertDialog(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10.0))),
@@ -433,25 +431,25 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
-                            children: List<Widget>.generate(6, (int index) {
-                              return ListTile(
+                            children: schedule.turns.map((i) =>
+                              ListTile(
                                 leading: Radio<int>(
                                   focusColor: AppColors.primaryColor,
                                   activeColor: AppColors.primaryColor,
-                                  value: index,
+                                  value: i.id,
                                   groupValue: selectedRadio,
                                   onChanged: (int value) {
                                     setState(() => selectedRadio = value);
                                   },
                                 ),
                                 title: Text(
-                                  '${listSchedule[index]}',
+                                  '${i.startsAt} - ${i.endsAt}',
                                   style: TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.w500),
-                                ),
-                              );
-                            }),
+                                ),)
+                              
+                            ).toList(),
                           ),
                         ),
                         DefaultButton(
